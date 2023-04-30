@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SchoolProject.ETL.WinFormsApp.Properties {
+namespace SchoolProject.ETL.UI.WinFormsApp.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SchoolProject.ETL.WinFormsApp.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SchoolProject.ETL.WinFormsApp.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SchoolProject.ETL.UI.WinFormsApp.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,10 +1,6 @@
-﻿using SchoolProject.ETL.Model.Data.StagingObjectAgr;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace SchoolProject.ETL.WinFormsApp.Helper
+namespace SchoolProject.ETL.UI.WinFormsApp.Helper
 {
     public class TabPageHelper
     {

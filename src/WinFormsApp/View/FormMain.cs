@@ -14,7 +14,7 @@ namespace ETL_SFC_WindowsForms
         {
             InitializeComponent();
 
-            activeUserControl = new UserControl0Start();
+            activeUserControl = new UserControl0_Start();
             activeUserControl.Dock = DockStyle.Fill;
             activeUserControl.Parent = panel1;
         }
@@ -23,22 +23,22 @@ namespace ETL_SFC_WindowsForms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            UserControlSwitch(new UserControl1Extract(), (Button)sender);
+            UserControlSwitch(new UserControl1_Extract(), (Button)sender);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            UserControlSwitch(new UserControl2Transform(), (Button)sender);
+            UserControlSwitch(new UserControl2_Transform(), (Button)sender);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            UserControlSwitch(new UserControl3Load(), (Button)sender);
+            UserControlSwitch(new UserControl3_Load(), (Button)sender);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            UserControlSwitch(new UserControl4Log(), (Button)sender);
+            UserControlSwitch(new UserControl4_Log(), (Button)sender);
         }
 
         private void UserControlSwitch(UserControl newUserConrol, Button currentButton)
@@ -55,7 +55,7 @@ namespace ETL_SFC_WindowsForms
             if (oldUserControl?.Name == newUserConrol.Name)
             {
                 newUserConrol.Dispose();
-                activeUserControl = new UserControl0Start();
+                activeUserControl = new UserControl0_Start();
             }
             else
             {

@@ -1,7 +1,8 @@
-﻿using SchoolProject.ETL.Model.Data.StagingObjectAgr;
+﻿using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace SchoolProject.ETL.WinFormsApp.Helper
+namespace SchoolProject.ETL.UI.WinFormsApp.Helper
 {
     public class DataGridViewHelper
     {
@@ -40,12 +41,12 @@ namespace SchoolProject.ETL.WinFormsApp.Helper
         {
             DataGridView dataGridView = new DataGridView
             {
-                    Parent = parent,
-                    Dock = DockStyle.Fill,
-                    AllowUserToAddRows = false,
-                    AllowUserToDeleteRows = false,
-                    EditMode = DataGridViewEditMode.EditProgrammatically,
-                    SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect
+                Parent = parent,
+                Dock = DockStyle.Fill,
+                AllowUserToAddRows = false,
+                AllowUserToDeleteRows = false,
+                EditMode = DataGridViewEditMode.EditProgrammatically,
+                SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect
             };
 
             return dataGridView;

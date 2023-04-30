@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SchoolProject.ETL.Model.Common
 {
-    public class BaseDataClass
+    public abstract class BaseDataClass
     {
         private event MyRemovingFromCollectionEventHandler OnRemovingFromCollection;
 

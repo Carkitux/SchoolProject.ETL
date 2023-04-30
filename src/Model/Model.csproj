@@ -12,7 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Logger\Logger.csproj" />
+    <None Update="Logging\LogConfiguration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CustomToolNamespace></CustomToolNamespace>
+    </None>
   </ItemGroup>
 
 </Project>

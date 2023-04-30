@@ -2,7 +2,7 @@ using ETL_SFC_WindowsForms;
 using System;
 using System.Windows.Forms;
 
-namespace SchoolProject.ETL.WinFormsApp
+namespace SchoolProject.ETL.UI.WinFormsApp
 {
     static class Program
     {
