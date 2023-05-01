@@ -24,7 +24,7 @@ namespace ETL_SFC_WindowsForms
             Transform.GenerateAllAttributes();
 
             UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
-            uc.dataGridUpdate();
+            uc.ReCreateAndValidate();
         }
 
         private void button_ColumnAdd_Click(object sender, EventArgs e)

@@ -1,5 +1,6 @@
 ﻿using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Windows.Forms;
 
 namespace SchoolProject.ETL.UI.WinFormsApp.Helper
@@ -8,6 +9,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.Helper
     {
         public static void UpdateData(DataGridView dataGridView, StagingObject stagingObject)
         {
+            //Setzt die Tabelle vor dem neugenerieren zurück
             dataGridView.Columns.Clear();
             dataGridView.Rows.Clear();
 
@@ -23,17 +25,24 @@ namespace SchoolProject.ETL.UI.WinFormsApp.Helper
                 dataGridView.Columns.Add(column);
             }
 
-            // Erstellt nun eine Zeile für jeden Datensatz und ordnet die einzelnen Daten zu
-            foreach (var datensatz in stagingObject.DataRows)
+            // Erstellt nun eine Zeile für jeden Datensatz und ordnet die einzelnen Daten
+            // anhand übereinstimmender Attribute/Header zu
+            foreach (var dataRow in stagingObject.DataRows)
             {
-                string[] dataRow = new string[datensatz.DataRowCells.Count];
-                int i = 0;
-                foreach (var singledata in datensatz.DataRowCells)
+                var dataGridRow = new string [dataGridView.Columns.Count];
+                foreach (var data in dataRow.DataRowCells)
                 {
-                    dataRow[i] = singledata.Value;
-                    i++;
+                    var i = 0;
+                    foreach (DataGridViewColumn column in dataGridView.Columns)
+                    {
+                        if (data.Attribut.Name == column.Name)
+                        {
+                            dataGridRow[i] = data.Value;
+                        }
+                        i++;
+                    }
                 }
-                dataGridView.Rows.Add(dataRow);
+                dataGridView.Rows.Add(dataGridRow);
             }
         }
 

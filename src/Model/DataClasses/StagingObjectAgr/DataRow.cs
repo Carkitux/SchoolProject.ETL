@@ -14,7 +14,7 @@ namespace SchoolProject.ETL.Model.DataClasses.StagingObjectAgr
             SourceFileName = sourceFileName;
             Sourcetyp = sourcetyp;
 
-            LogWriter.Log($"In StagingObject \"{StagingObject.Name}\" : New DataRow \"{ID}\"", Loglevel.Information_SingleStep);
+            LogWriter.Log($"In StagingObject \"{StagingObject.Name}\" : New DataRow \"{ID}\"", Loglevel.Alles);
         }
         public DataRow(Guid guid, StagingObject stagingObject, string sourceFileName, Filetyp sourcetyp)
         {
@@ -23,7 +23,7 @@ namespace SchoolProject.ETL.Model.DataClasses.StagingObjectAgr
             SourceFileName = sourceFileName;
             Sourcetyp = sourcetyp;
 
-            LogWriter.Log($"New DataRow \"{ID}\" in StagingObject \"{StagingObject.Name}\"", Loglevel.Information_SingleStep);
+            LogWriter.Log($"New DataRow \"{ID}\" in StagingObject \"{StagingObject.Name}\"", Loglevel.Alles);
         }
 
         public StagingObject StagingObject { get; set; }

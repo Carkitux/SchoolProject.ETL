@@ -12,9 +12,12 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
 {
     public class CSV
     {
+        int loggingDataRowCount;
+        int loggingDataRowCellCount;
+
         public static void LoadFromCSV(string path, string separator, bool hasHeader)
         {
-            LogWriter.LogHeader($"Step Extract - Startet Export CSV: \"{path}\"", Loglevel.Information_Summary);
+            LogWriter.LogHeader($"Step Extract - Startet Export CSV: \"{path}\"", Loglevel.Zusammenfassungen);
 
             // Liest alle Zeilen der CSV Datei in einen String ein
             var lines = File.ReadLines(path);
@@ -66,16 +69,16 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
             if (hasHeader)
             {
                 var attribute = lines.First().Replace(separator + " ", separator).Split(separator);
-                foreach (string attribut in attribute)
+                foreach (var attributName in attribute)
                 {
-                    Attribut newAttribut = new Attribut(stagingObject, attribut, Datatyp.Unknown);
+                    Attribut newAttribut = new Attribut(stagingObject, attributName, Datatyp.Unknown);
                     stagingObject.Attributes.Add(newAttribut);
                 }
             }
             // Wenn die CSV Datei keine Header hat, wird für jede Spalte ein Ersatz Attribut erzeugt mit hochzählenden Spaltennamen
             else
             {
-                int count = lines.First().Replace(separator + " ", separator).Split(separator).Count();
+                var count = lines.First().Replace(separator + " ", separator).Split(separator).Count();
                 for (int i = 0; i < count; i++)
                 {
                     Attribut newAttribut = new Attribut(stagingObject, $"Spalte{i}", Datatyp.Unknown);

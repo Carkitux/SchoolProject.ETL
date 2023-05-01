@@ -91,7 +91,7 @@
             // 
             labelDataSourceStjObj.AutoSize = true;
             labelDataSourceStjObj.Dock = System.Windows.Forms.DockStyle.Bottom;
-            labelDataSourceStjObj.Location = new System.Drawing.Point(0, 187);
+            labelDataSourceStjObj.Location = new System.Drawing.Point(0, 142);
             labelDataSourceStjObj.Name = "labelDataSourceStjObj";
             labelDataSourceStjObj.Size = new System.Drawing.Size(133, 15);
             labelDataSourceStjObj.TabIndex = 5;
@@ -102,9 +102,9 @@
             listBoxDataSourceStjObj.Dock = System.Windows.Forms.DockStyle.Bottom;
             listBoxDataSourceStjObj.FormattingEnabled = true;
             listBoxDataSourceStjObj.ItemHeight = 15;
-            listBoxDataSourceStjObj.Location = new System.Drawing.Point(0, 202);
+            listBoxDataSourceStjObj.Location = new System.Drawing.Point(0, 157);
             listBoxDataSourceStjObj.Name = "listBoxDataSourceStjObj";
-            listBoxDataSourceStjObj.Size = new System.Drawing.Size(150, 274);
+            listBoxDataSourceStjObj.Size = new System.Drawing.Size(150, 319);
             listBoxDataSourceStjObj.TabIndex = 6;
             // 
             // UserControl2_Transform_LeftMenu0_ColumnInfo

@@ -6,9 +6,8 @@ namespace SchoolProject.ETL.Model.Enums
 {
     public enum Loglevel
     {
-        Default = 0,
-        Information_SingleStep = 10,
-        Information_Summary = 20,
-        Error = 30
+        Alles = 10,
+        Zusammenfassungen = 20,
+        Fehler = 30
     }
 }

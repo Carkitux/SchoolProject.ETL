@@ -13,9 +13,8 @@ namespace SchoolProject.ETL.Model.DataClasses.StagingObjectAgr
 
             Name = name;
             Datatyp = datatyp;
-            WasTransferred = false;
 
-            LogWriter.Log($"In StagingObject \"{StagingObject.Name}\" : New Attribut \"{Name}\" with Datatyp \"{Datatyp}\"", Loglevel.Information_SingleStep);
+            LogWriter.Log($"In StagingObject \"{StagingObject.Name}\" : New Attribut \"{Name}\" with Datatyp \"{Datatyp}\"", Loglevel.Alles);
         }
 
         // Parent
@@ -23,8 +22,8 @@ namespace SchoolProject.ETL.Model.DataClasses.StagingObjectAgr
 
         public string Name { get; set; }
         public Datatyp Datatyp { get; set; }
-        public bool WasTransferred { get; set; }
         public List<Attribut> WasTransferredTo { get; set; } = new List<Attribut>();
+        public List<Attribut> WasTransferredFrom { get; set; } = new List<Attribut>();
         public List<DataRowCell> DataRowCells { get; set; } = new List<DataRowCell>();
 
         public override string ToString()

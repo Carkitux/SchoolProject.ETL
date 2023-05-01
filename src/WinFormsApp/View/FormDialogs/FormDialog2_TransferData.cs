@@ -1,5 +1,6 @@
 ﻿using SchoolProject.ETL.Model.DataClasses;
 using SchoolProject.ETL.Model.LogicClasses.Transform;
+using SchoolProject.ETL.UI.WinFormsApp.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,10 +27,17 @@ namespace ETL_SFC_WindowsForms
                 comboBox_ZielAttribut2.Items.Add(item.Name);
             }
 
-            listBoxUpdate();
+            radioButton_Transfer.Checked = true;
+
+            ReCreateAndValidate();
         }
 
-        public string ZielAttribut;
+        string ZielAttribut;
+
+        private void button_Reset_Click(object sender, EventArgs e)
+        {
+            ReCreateAndValidate();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -39,21 +47,43 @@ namespace ETL_SFC_WindowsForms
                 return;
             }
 
-            listBox_TransferAttribute.Items.Add(listBox_QuellAttribute.SelectedItem);
+            listBox_TransferToTransform.Items.Add(listBox_QuellAttribute.SelectedItem);
             listBox_QuellAttribute.Items.Remove(listBox_QuellAttribute.SelectedItem);
+
+            // ReCreateAndValidate();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            listBox_QuellAttribute.Items.Add(listBox_TransferAttribute.SelectedItem);
-            listBox_TransferAttribute.Items.Remove(listBox_TransferAttribute.SelectedItem);
+            if (listBox_ZielAttribute.SelectedItem is null)
+            {
+                MessageBox.Show("Bitte wählen Sie eine Quellattribut der Zielspalte aus das Sie entfernen möchten.");
+                return;
+            }
+
+            listBox_TransferFromTransform.Items.Add(listBox_ZielAttribute.SelectedItem);
+            listBox_ZielAttribute.Items.Remove(listBox_ZielAttribute.SelectedItem);
+
+            // ReCreateAndValidate();
+        }
+
+        private void button_Ausfuehren_Click(object sender, EventArgs e)
+        {
+
+
+            ReCreateAndValidate();
+        }
+
+        private void button_Schließen_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             List<string[]> listbox3select = new List<string[]>();
 
-            foreach (var item in listBox_TransferAttribute.Items)
+            foreach (var item in listBox_TransferToTransform.Items)
             {
                 listbox3select.Add(item.ToString().Split(" // "));
             }
@@ -66,43 +96,82 @@ namespace ETL_SFC_WindowsForms
                 {
                     asd.Add(item[1]);
                 }
-                Transform.TransferData(group.Key, asd, ZielAttribut);
+                Transform.DataTransfer(group.Key, asd, ZielAttribut);
             }
 
             this.DialogResult = DialogResult.OK;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        public void ReCreateAndValidate()
         {
-            this.DialogResult = DialogResult.Cancel;
+            listBoxUpdate();
+
+            if (radioButton_Transfer.Checked)
+            {
+                comboBox_ZielAttribut2.Enabled = false;
+                textBox_Split.Enabled = false;
+                textBox_Merge.Enabled = false;
+            }
+            else if (radioButton_Merge.Checked)
+            {
+                comboBox_ZielAttribut2.Enabled = false;
+                textBox_Split.Enabled = false;
+                textBox_Merge.Enabled = true;
+            }
+            else if (radioButton_Split.Checked)
+            {
+                comboBox_ZielAttribut2.Enabled = true;
+                textBox_Split.Enabled = true;
+                textBox_Merge.Enabled = false;
+            }
         }
 
         private void listBoxUpdate()
         {
             listBox_QuellAttribute.Items.Clear();
-            listBox_TransferAttribute.Items.Clear();
+            listBox_TransferToTransform.Items.Clear();
             listBox_ZielAttribute.Items.Clear();
 
-            foreach (var item in StagingArea.StObjects.Where(x => x.Name == comboBox_QuellStObj.SelectedItem?.ToString()))
+            foreach (var stagingObject in StagingArea.StObjects.Where(x => x.Name == comboBox_QuellStObj.SelectedItem?.ToString()))
             {
-                foreach (var head in item.Attributes.Where(x => x.WasTransferred == false))
+                foreach (var attribut in stagingObject.Attributes.Where(x => x.WasTransferredTo.Count == 0).ToList())
                 {
-                    listBox_QuellAttribute.Items.Add(item.Name + " // " + head.Name);
+                    listBox_QuellAttribute.Items.Add(stagingObject.Name + " // " + attribut.Name);
                 }
             }
 
-            foreach (var Attribut in StagingArea.TransformStObject.Attributes.Where(x => x.Name == comboBox_ZielAttribut.SelectedItem?.ToString()))
+            foreach (var attribut in StagingArea.TransformStObject.Attributes.Where(x => x.Name == comboBox_ZielAttribut.SelectedItem?.ToString()))
             {
-                foreach (var item in Attribut.WasTransferredTo)
+                foreach (var sourceAttribut in attribut.WasTransferredFrom)
                 {
-                    listBox_ZielAttribute.Items.Add(item.Name);
+                    listBox_ZielAttribute.Items.Add(sourceAttribut.Name);
                 }
             }
         }
 
         private void comboBox_QuellStObj_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listBoxUpdate();
+            ReCreateAndValidate();
+        }
+
+        private void comboBox_ZielAttribut_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ReCreateAndValidate();
+        }
+
+        private void radioButton_Transfer_CheckedChanged(object sender, EventArgs e)
+        {
+            ReCreateAndValidate();
+        }
+
+        private void radioButton_Merge_CheckedChanged(object sender, EventArgs e)
+        {
+            ReCreateAndValidate();
+        }
+
+        private void radioButton_Split_CheckedChanged(object sender, EventArgs e)
+        {
+            ReCreateAndValidate();
         }
     }
 }

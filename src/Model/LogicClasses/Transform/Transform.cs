@@ -4,6 +4,7 @@ using SchoolProject.ETL.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Xml.Linq;
@@ -12,7 +13,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Transform
 {
     public class Transform
     {
-        public static void TransferData(string _quellStObj, List<string> _quellAttribut, string _zielAttribut)
+        public static void DataTransfer(string _quellStObj, List<string> _quellAttribut, string _zielAttribut)
         {
             StagingObject TransformStObj = StagingArea.TransformStObject;
 
@@ -39,7 +40,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Transform
                     TransformDatenSatz.DataRowCells.Add(newTransformSingleData);
                 }
             }
-            quellAttribute.ForEach(x => x.WasTransferred = true);
+            //quellAttribute.ForEach(x => x.WasTransferred = true);
             zielAttribut.WasTransferredTo.AddRange(quellAttribute);
         }
 
@@ -77,31 +78,36 @@ namespace SchoolProject.ETL.Model.LogicClasses.Transform
 
         //}
 
-        public static void CreateAttribut(string name, Datatyp datentyp)
+        public static void CreateAttribut(string name, Datatyp datatyp)
         {
-            StagingObject TransformStObj = StagingArea.TransformStObject;
-            Attribut newAttribut = new Attribut(TransformStObj, name, datentyp);
+            var TransformStObj = StagingArea.TransformStObject;
+            var newAttribut = new Attribut(TransformStObj, name, datatyp);
             TransformStObj.Attributes.Add(newAttribut);
         }
 
-        public static void DeleteAttribut(string attributsName)
+        public static void DeleteAttribut(string attributName)
         {
-            StagingObject TransformStObj = StagingArea.TransformStObject;
-            Attribut selectedAttribut = TransformStObj.Attributes.Where(x => x.Name == attributsName).First();
-            selectedAttribut.WasTransferredTo.ForEach(x => x.WasTransferred = false);
-            foreach (var datensatz in TransformStObj.DataRows)
+            var TransformStObj = StagingArea.TransformStObject;
+
+            var selectedAttribut = TransformStObj.Attributes.Where(x => x.Name == attributName).First();
+            selectedAttribut.WasTransferredFrom.ForEach(x => x.WasTransferredTo.Remove(selectedAttribut));
+            selectedAttribut.WasTransferredTo = null;
+
+            foreach (var dataRow in TransformStObj.DataRows)
             {
-                DataRowCell singleData = datensatz.DataRowCells.Where(x => x.Attribut == selectedAttribut).First();
-                datensatz.DataRowCells.Remove(singleData);
+                var data = dataRow.DataRowCells.Where(x => x.Attribut == selectedAttribut).First();
+                dataRow.DataRowCells.Remove(data);
             }
+
             TransformStObj.DataRows.RemoveAll(x => x.DataRowCells.Count == 0);
             TransformStObj.Attributes.Remove(selectedAttribut);
         }
 
         public static void GenerateAllAttributes()
         {
-            StagingObject TransformStObj = StagingArea.TransformStObject;
-            List<string> deleteAttributes = new List<string>();
+            var TransformStObj = StagingArea.TransformStObject;
+            var deleteAttributes = new List<string>();
+
             foreach (var attribut in TransformStObj.Attributes)
             {
                 deleteAttributes.Add(attribut.Name);              
@@ -120,6 +126,50 @@ namespace SchoolProject.ETL.Model.LogicClasses.Transform
                         continue;
                     }
                     CreateAttribut(stObjattribut.Name, Datatyp.Unknown);
+                }
+            }
+        }
+
+        public static void AutomaticAllDataTransfer()
+        {
+            var TransformStObj = StagingArea.TransformStObject;
+
+            foreach (var stagingObject in StagingArea.StObjects)
+            {
+                foreach (var dataRow in stagingObject.DataRows)
+                {
+                    foreach (var dataRowCell in dataRow.DataRowCells)
+                    {
+                        var targetDataRow = TransformStObj.DataRows.Where(x => x.SourceFileName == dataRow.SourceFileName && x.ID == dataRow.ID).FirstOrDefault();
+                        var targetAttribut = TransformStObj.Attributes.Where(x => x.Name == dataRowCell.Attribut.Name).FirstOrDefault();
+                        
+                        if (targetAttribut is null)
+                        {
+                            continue;
+                        }
+
+                        if (targetDataRow is null)
+                        {
+                            var newTransformDataRow = new DataRow(dataRow.ID, TransformStObj, dataRow.SourceFileName, dataRow.Sourcetyp);
+                            var newTransformDataRowCell = new DataRowCell(newTransformDataRow, targetAttribut, dataRowCell.Value);
+                            newTransformDataRow.DataRowCells.Add(newTransformDataRowCell);
+                            TransformStObj.DataRows.Add(newTransformDataRow);
+                        }
+                        else
+                        {
+                            var newTransformDataRowCell = new DataRowCell(targetDataRow, targetAttribut, dataRowCell.Value);
+                            targetDataRow.DataRowCells.Add(newTransformDataRowCell);
+                        }
+
+                        if (!dataRowCell.Attribut.WasTransferredTo.Contains(targetAttribut))
+                        {
+                            dataRowCell.Attribut.WasTransferredTo.Add(targetAttribut);
+                        }
+                        if (!targetAttribut.WasTransferredFrom.Contains(dataRowCell.Attribut))
+                        {
+                            targetAttribut.WasTransferredFrom.Add(dataRowCell.Attribut);
+                        }
+                    }
                 }
             }
         }

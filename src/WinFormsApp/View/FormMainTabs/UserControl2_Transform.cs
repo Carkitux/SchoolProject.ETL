@@ -1,6 +1,7 @@
 ﻿using SchoolProject.ETL.Model.DataClasses;
 using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
 using SchoolProject.ETL.Model.LogicClasses.Transform;
+using SchoolProject.ETL.UI.WinFormsApp.Helper;
 using SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs;
 using System;
 using System.Collections.Generic;
@@ -27,42 +28,6 @@ namespace ETL_SFC_WindowsForms
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        public void dataGridUpdate()
-        {
-            StagingObject TransformStObj = StagingArea.TransformStObject;
-
-            dataGridView1.Columns.Clear();
-            dataGridView1.Rows.Clear();
-            // Holt sich alle Header der Datei und erstellt demnach die Spalten der Tabelle
-            List<string> headers = new List<string>();
-            TransformStObj.Attributes?.ForEach(data => headers.Add(data.Name));
-            foreach (var header in headers.Distinct())
-            {
-                var column = new DataGridViewTextBoxColumn
-                {
-                    HeaderText = header,
-                    Name = header,
-                    SortMode = DataGridViewColumnSortMode.NotSortable
-                };
-                dataGridView1.Columns.Add(column);
-            }
-
-            // Erstellt nun eine Zeile für jeden Datensatz und ordnet die einzelnen Daten zu
-            foreach (var dataRow in TransformStObj.DataRows)
-            {
-                var dataGridRow = new string[dataRow.DataRowCells.Count];
-                var i = 0;
-
-                foreach (var dataRowCell in dataRow.DataRowCells)
-                {
-                    dataGridRow[i] = dataRowCell.Value;
-                    i++;
-                }
-
-                dataGridView1.Rows.Add(dataGridRow);
-            }
         }
 
         private void button_ColumnMenu_Click(object sender, EventArgs e)
@@ -114,6 +79,11 @@ namespace ETL_SFC_WindowsForms
             activeLeftMenuUserControl = newUserControl;
             activeLeftMenuUserControl.Dock = DockStyle.Fill;
             activeLeftMenuUserControl.Parent = panel4;
+        }
+
+        public void ReCreateAndValidate()
+        {
+            DataGridViewHelper.UpdateData(dataGridView1, StagingArea.TransformStObject);
         }
     }
 }

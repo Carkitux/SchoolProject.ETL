@@ -1,4 +1,5 @@
 ﻿using ETL_SFC_WindowsForms;
+using SchoolProject.ETL.Model.LogicClasses.Transform;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,9 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 
         private void button_DataTransferAutomatic_Click(object sender, EventArgs e)
         {
-
+            Transform.AutomaticAllDataTransfer();
+            UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
+            uc.ReCreateAndValidate();
         }
 
         private void button_DataTransferManual_Click(object sender, EventArgs e)
@@ -28,7 +31,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
                 if (form2.ShowDialog(this) == DialogResult.OK)
                 {
                     UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
-                    uc.dataGridUpdate();
+                    uc.ReCreateAndValidate();
                 }
                 else
                 {

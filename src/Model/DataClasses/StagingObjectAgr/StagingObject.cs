@@ -11,7 +11,7 @@ namespace SchoolProject.ETL.Model.DataClasses.StagingObjectAgr
         {
             Name = name;
 
-            LogWriter.Log($"New StagingObject \"{Name}\"", Loglevel.Information_SingleStep);
+            LogWriter.Log($"New StagingObject \"{Name}\"", Loglevel.Alles);
         }
 
         public string Name { get; private set; }

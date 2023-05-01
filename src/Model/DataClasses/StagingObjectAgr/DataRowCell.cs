@@ -13,7 +13,7 @@ namespace SchoolProject.ETL.Model.DataClasses.StagingObjectAgr
             Value = value;
 
             LogWriter.Log($"In StagingObject \"{DataRow.StagingObject.Name}\" in DataRow \"{DataRow.ID}\" : " +
-                $"New DataCell \"{Value}\" with Attribut \"{Attribut.Name}\"", Loglevel.Information_SingleStep);
+                $"New DataCell \"{Value}\" with Attribut \"{Attribut.Name}\"", Loglevel.Alles);
         }
 
         public DataRow DataRow { get; set; }

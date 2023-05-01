@@ -84,7 +84,7 @@ namespace ETL_SFC_WindowsForms
             StagingObject stagingObject = StagingArea.StObjects.Where(x => x.Name == tabControl1.SelectedTab.Text).FirstOrDefault();
 
             // Validiate
-            if (stagingObject.Attributes.Where(x => x.WasTransferred == true).Count() >= 1)
+            if (stagingObject.Attributes.Where(x => x.WasTransferredTo.Count >= 1).Count() >= 1)
             {
                 MessageBox.Show("Von dieser Tabelle wurden bereits Daten transformiert.");
                 return;
