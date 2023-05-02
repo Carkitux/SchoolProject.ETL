@@ -15,19 +15,9 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 
         private void button_DataTransferAutomatic_Click(object sender, EventArgs e)
         {
-            using (var form4 = new FormDialog4_GenerateColumns)
-            {
-                if (form4.ShowDialog(this) == DialogResult.OK)
-                {
-                    Transform.AutomaticAllDataTransfer();
-                    UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
-                    uc.ReCreateAndValidate();
-                }
-                else
-                {
-
-                }
-            }
+            Transform.AutomaticAllDataTransfer();
+            UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
+            uc.ReCreateAndValidate();
         }
 
         private void button_DataTransferManual_Click(object sender, EventArgs e)

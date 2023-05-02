@@ -102,7 +102,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Transform
             TransformStObj.Attributes.Remove(selectedAttribut);
         }
 
-        public static void GenerateAllAttributes()
+        public static void GenerateAllAttributes(List<StagingObject> stagingObjects)
         {
             var TransformStObj = StagingArea.TransformStObject;
             var deleteAttributes = new List<string>();
@@ -116,7 +116,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Transform
                 DeleteAttribut(item);
             }
 
-            foreach (var stagingObject in StagingArea.StObjects)
+            foreach (var stagingObject in stagingObjects)
             {
                 foreach (var stObjattribut in stagingObject.Attributes)
                 {
@@ -129,11 +129,11 @@ namespace SchoolProject.ETL.Model.LogicClasses.Transform
             }
         }
 
-        public static void AutomaticAllDataTransfer(List<StagingObject> stagingObjects)
+        public static void AutomaticAllDataTransfer()
         {
             var TransformStObj = StagingArea.TransformStObject;
 
-            foreach (var stagingObject in stagingObjects)
+            foreach (var stagingObject in StagingArea.StObjects)
             {
                 foreach (var dataRow in stagingObject.DataRows)
                 {

@@ -16,6 +16,8 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
             dataGridView1.SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect;
             dataGridView1.MultiSelect = false;
             panel3.Visible = false;
+
+            ReCreateAndValidate();
         }
 
         private UserControl activeMenuUserControl;

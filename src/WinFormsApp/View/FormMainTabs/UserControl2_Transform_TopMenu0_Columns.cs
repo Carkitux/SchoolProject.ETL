@@ -22,10 +22,20 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 
         private void button_ColumnGenerate_Click(object sender, EventArgs e)
         {
-            Transform.GenerateAllAttributes();
+            using (var form4 = new FormDialog4_GenerateColumns())
+            {
+                if (form4.ShowDialog(this) == DialogResult.OK)
+                {
+                    Transform.GenerateAllAttributes(form4.selectedStagingObjects);
 
-            UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
-            uc.ReCreateAndValidate();
+                    UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
+                    uc.ReCreateAndValidate();
+                }
+                else
+                {
+
+                }
+            }
         }
 
         private void button_ColumnAdd_Click(object sender, EventArgs e)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -22,11 +23,19 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             }
         }
 
-        List<StagingObject> selectedStagingObjectName = new List<StagingObject>();
+        public List<StagingObject> selectedStagingObjects = new List<StagingObject>();
 
         private void button_Okay_Click(object sender, EventArgs e)
-        { 
-
+        {
+            if ((string)comboBox_stagingObject.SelectedItem == "Alle kombinieren")
+            {
+                selectedStagingObjects.AddRange(StagingArea.StObjects);
+            }
+            else
+            {
+                var stagingObject = StagingArea.StObjects.Where(x => x.Name == (string)comboBox_stagingObject.SelectedItem).First();
+                selectedStagingObjects.Add(stagingObject);
+            }
             DialogResult = DialogResult.OK;
         }
 
