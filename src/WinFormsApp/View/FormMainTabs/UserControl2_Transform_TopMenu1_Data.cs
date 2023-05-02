@@ -2,6 +2,7 @@
 using SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs;
 using System;
 using System.Windows.Forms;
+using static System.Windows.Forms.DataFormats;
 
 namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 {
@@ -14,9 +15,19 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 
         private void button_DataTransferAutomatic_Click(object sender, EventArgs e)
         {
-            Transform.AutomaticAllDataTransfer();
-            UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
-            uc.ReCreateAndValidate();
+            using (var form4 = new FormDialog4_GenerateColumns)
+            {
+                if (form4.ShowDialog(this) == DialogResult.OK)
+                {
+                    Transform.AutomaticAllDataTransfer();
+                    UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
+                    uc.ReCreateAndValidate();
+                }
+                else
+                {
+
+                }
+            }
         }
 
         private void button_DataTransferManual_Click(object sender, EventArgs e)

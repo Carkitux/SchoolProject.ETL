@@ -129,11 +129,11 @@ namespace SchoolProject.ETL.Model.LogicClasses.Transform
             }
         }
 
-        public static void AutomaticAllDataTransfer()
+        public static void AutomaticAllDataTransfer(List<StagingObject> stagingObjects)
         {
             var TransformStObj = StagingArea.TransformStObject;
 
-            foreach (var stagingObject in StagingArea.StObjects)
+            foreach (var stagingObject in stagingObjects)
             {
                 foreach (var dataRow in stagingObject.DataRows)
                 {
