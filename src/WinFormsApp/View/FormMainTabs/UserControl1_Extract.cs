@@ -1,17 +1,13 @@
 ﻿using SchoolProject.ETL.Model.DataClasses;
-using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
-using SchoolProject.ETL.Model.Enums;
 using SchoolProject.ETL.Model.LogicClasses.Serializer;
 using SchoolProject.ETL.UI.WinFormsApp.Helper;
+using SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace ETL_SFC_WindowsForms
+namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 {
     // Stellt den Inhalt des "Extract" Reiters des Hauptmenüs dar
     public partial class UserControl1_Extract : UserControl

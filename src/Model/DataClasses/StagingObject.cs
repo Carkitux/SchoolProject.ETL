@@ -3,7 +3,7 @@ using SchoolProject.ETL.Model.Enums;
 using SchoolProject.ETL.Model.Logging;
 using System.Collections.Generic;
 
-namespace SchoolProject.ETL.Model.DataClasses.StagingObjectAgr
+namespace SchoolProject.ETL.Model.DataClasses
 {
     public class StagingObject : BaseDataClass
     {

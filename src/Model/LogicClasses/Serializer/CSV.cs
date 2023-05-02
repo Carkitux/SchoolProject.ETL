@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using SchoolProject.ETL.Model.DataClasses;
-using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
 using SchoolProject.ETL.Model.Enums;
 using SchoolProject.ETL.Model.Logging;
 using SchoolProject.ETL.Model.LogicClasses;

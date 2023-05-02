@@ -2,7 +2,7 @@
 using SchoolProject.ETL.Model.Enums;
 using SchoolProject.ETL.Model.Logging;
 
-namespace SchoolProject.ETL.Model.DataClasses.StagingObjectAgr
+namespace SchoolProject.ETL.Model.DataClasses
 {
     public class DataRowCell : BaseDataClass
     {

@@ -1,16 +1,9 @@
 ﻿using SchoolProject.ETL.Model.DataClasses;
-using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
 using SchoolProject.ETL.Model.Enums;
-using SchoolProject.ETL.UI.WinFormsApp.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 {
@@ -21,6 +14,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
         public UserControl2_Transform_LeftMenu0_ColumnInfo(Attribut attribut)
         {
             InitializeComponent();
+
             selectedAttribut = attribut;
 
             comboBoxDatatyp.DataSource = Enum.GetValues(typeof(Datatyp));

@@ -1,4 +1,4 @@
-﻿namespace ETL_SFC_WindowsForms
+﻿namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 {
     partial class FormDialog2_TransferData
     {
@@ -49,6 +49,10 @@
             textBox_Split = new System.Windows.Forms.TextBox();
             textBox_Merge = new System.Windows.Forms.TextBox();
             listBox_TransferFromTransform = new System.Windows.Forms.ListBox();
+            label1 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             SuspendLayout();
             // 
@@ -56,23 +60,25 @@
             // 
             listBox_QuellAttribute.FormattingEnabled = true;
             listBox_QuellAttribute.ItemHeight = 15;
-            listBox_QuellAttribute.Location = new System.Drawing.Point(8, 120);
+            listBox_QuellAttribute.Location = new System.Drawing.Point(8, 150);
             listBox_QuellAttribute.Name = "listBox_QuellAttribute";
-            listBox_QuellAttribute.Size = new System.Drawing.Size(262, 169);
+            listBox_QuellAttribute.Size = new System.Drawing.Size(262, 139);
             listBox_QuellAttribute.TabIndex = 1;
+            listBox_QuellAttribute.SelectedIndexChanged += listBox_QuellAttribute_SelectedIndexChanged;
             // 
             // listBox_TransferToTransform
             // 
             listBox_TransferToTransform.FormattingEnabled = true;
             listBox_TransferToTransform.ItemHeight = 15;
-            listBox_TransferToTransform.Location = new System.Drawing.Point(401, 70);
+            listBox_TransferToTransform.Location = new System.Drawing.Point(401, 86);
             listBox_TransferToTransform.Name = "listBox_TransferToTransform";
             listBox_TransferToTransform.Size = new System.Drawing.Size(241, 49);
             listBox_TransferToTransform.TabIndex = 2;
+            listBox_TransferToTransform.SelectedIndexChanged += listBox_TransferToTransform_SelectedIndexChanged;
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(298, 68);
+            button1.Location = new System.Drawing.Point(298, 87);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(69, 23);
             button1.TabIndex = 3;
@@ -82,7 +88,7 @@
             // 
             // button2
             // 
-            button2.Location = new System.Drawing.Point(298, 92);
+            button2.Location = new System.Drawing.Point(298, 111);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(69, 23);
             button2.TabIndex = 4;
@@ -142,7 +148,7 @@
             // 
             // button_Ausfuehren
             // 
-            button_Ausfuehren.Location = new System.Drawing.Point(274, 240);
+            button_Ausfuehren.Location = new System.Drawing.Point(437, 294);
             button_Ausfuehren.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             button_Ausfuehren.Name = "button_Ausfuehren";
             button_Ausfuehren.Size = new System.Drawing.Size(123, 22);
@@ -175,7 +181,7 @@
             // radioButton_Transfer
             // 
             radioButton_Transfer.AutoSize = true;
-            radioButton_Transfer.Location = new System.Drawing.Point(298, 131);
+            radioButton_Transfer.Location = new System.Drawing.Point(298, 164);
             radioButton_Transfer.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             radioButton_Transfer.Name = "radioButton_Transfer";
             radioButton_Transfer.Size = new System.Drawing.Size(66, 19);
@@ -188,7 +194,7 @@
             // radioButton_Merge
             // 
             radioButton_Merge.AutoSize = true;
-            radioButton_Merge.Location = new System.Drawing.Point(298, 151);
+            radioButton_Merge.Location = new System.Drawing.Point(298, 184);
             radioButton_Merge.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             radioButton_Merge.Name = "radioButton_Merge";
             radioButton_Merge.Size = new System.Drawing.Size(59, 19);
@@ -201,7 +207,7 @@
             // radioButton_Split
             // 
             radioButton_Split.AutoSize = true;
-            radioButton_Split.Location = new System.Drawing.Point(298, 194);
+            radioButton_Split.Location = new System.Drawing.Point(298, 227);
             radioButton_Split.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             radioButton_Split.Name = "radioButton_Split";
             radioButton_Split.Size = new System.Drawing.Size(48, 19);
@@ -215,14 +221,15 @@
             // 
             listBox_ZielAttribute.FormattingEnabled = true;
             listBox_ZielAttribute.ItemHeight = 15;
-            listBox_ZielAttribute.Location = new System.Drawing.Point(401, 120);
+            listBox_ZielAttribute.Location = new System.Drawing.Point(401, 150);
             listBox_ZielAttribute.Name = "listBox_ZielAttribute";
-            listBox_ZielAttribute.Size = new System.Drawing.Size(241, 169);
+            listBox_ZielAttribute.Size = new System.Drawing.Size(241, 139);
             listBox_ZielAttribute.TabIndex = 18;
+            listBox_ZielAttribute.SelectedIndexChanged += listBox_ZielAttribute_SelectedIndexChanged;
             // 
             // textBox_Split
             // 
-            textBox_Split.Location = new System.Drawing.Point(298, 213);
+            textBox_Split.Location = new System.Drawing.Point(298, 246);
             textBox_Split.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             textBox_Split.Name = "textBox_Split";
             textBox_Split.PlaceholderText = "Seperator";
@@ -231,7 +238,7 @@
             // 
             // textBox_Merge
             // 
-            textBox_Merge.Location = new System.Drawing.Point(298, 171);
+            textBox_Merge.Location = new System.Drawing.Point(298, 204);
             textBox_Merge.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             textBox_Merge.Name = "textBox_Merge";
             textBox_Merge.PlaceholderText = "Connector";
@@ -242,16 +249,57 @@
             // 
             listBox_TransferFromTransform.FormattingEnabled = true;
             listBox_TransferFromTransform.ItemHeight = 15;
-            listBox_TransferFromTransform.Location = new System.Drawing.Point(8, 70);
+            listBox_TransferFromTransform.Location = new System.Drawing.Point(8, 86);
             listBox_TransferFromTransform.Name = "listBox_TransferFromTransform";
             listBox_TransferFromTransform.Size = new System.Drawing.Size(262, 49);
             listBox_TransferFromTransform.TabIndex = 21;
+            listBox_TransferFromTransform.SelectedIndexChanged += listBox_TransferFromTransform_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(8, 71);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(38, 15);
+            label1.TabIndex = 22;
+            label1.Text = "label1";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(8, 135);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(38, 15);
+            label4.TabIndex = 23;
+            label4.Text = "label4";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(401, 71);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(38, 15);
+            label5.TabIndex = 24;
+            label5.Text = "label5";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(401, 135);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(38, 15);
+            label6.TabIndex = 25;
+            label6.Text = "label6";
             // 
             // FormDialog2_TransferData
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(648, 322);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label1);
             Controls.Add(listBox_TransferFromTransform);
             Controls.Add(textBox_Merge);
             Controls.Add(textBox_Split);
@@ -303,5 +351,9 @@
         private System.Windows.Forms.TextBox textBox_Split;
         private System.Windows.Forms.TextBox textBox_Merge;
         private System.Windows.Forms.ListBox listBox_TransferFromTransform;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

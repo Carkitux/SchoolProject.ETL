@@ -1,5 +1,4 @@
-﻿using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace SchoolProject.ETL.Model.DataClasses

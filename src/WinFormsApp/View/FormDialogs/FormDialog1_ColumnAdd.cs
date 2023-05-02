@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace ETL_SFC_WindowsForms
+namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 {
     public partial class FormDialog1_ColumnAdd : Form
     {

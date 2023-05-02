@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ETL_SFC_WindowsForms
+namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 {
     // Stellt den Inhalt des "Logging" Reiters des Hauptmenüs dar
     public partial class UserControl4_Log : UserControl

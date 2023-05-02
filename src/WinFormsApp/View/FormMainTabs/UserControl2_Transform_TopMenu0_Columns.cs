@@ -1,10 +1,11 @@
 ﻿using SchoolProject.ETL.Model.DataClasses;
 using SchoolProject.ETL.Model.LogicClasses.Transform;
 using SchoolProject.ETL.UI.WinFormsApp.Helper;
+using SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs;
 using System;
 using System.Windows.Forms;
 
-namespace ETL_SFC_WindowsForms
+namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 {
     public partial class UserControl2_Transform_TopMenu0_Columns : UserControl
     {

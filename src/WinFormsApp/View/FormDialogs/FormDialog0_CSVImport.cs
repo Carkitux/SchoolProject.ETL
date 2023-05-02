@@ -1,10 +1,10 @@
-﻿using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
+﻿using SchoolProject.ETL.Model.DataClasses;
 using SchoolProject.ETL.Model.LogicClasses.Serializer;
 using SchoolProject.ETL.UI.WinFormsApp.Helper;
 using System;
 using System.Windows.Forms;
 
-namespace ETL_SFC_WindowsForms
+namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 {
     public partial class FormDialog0_CSVImport : Form
     {

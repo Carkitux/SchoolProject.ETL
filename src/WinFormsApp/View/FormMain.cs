@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs;
+using System;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
-namespace ETL_SFC_WindowsForms
+namespace SchoolProject.ETL.UI.WinFormsApp.View
 {
     public partial class FormMain : Form
     {

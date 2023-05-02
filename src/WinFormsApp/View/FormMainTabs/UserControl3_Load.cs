@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ETL_SFC_WindowsForms
+namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 {
     public partial class UserControl3_Load : UserControl
     {

@@ -1,11 +1,6 @@
-﻿using ETL_SFC_WindowsForms;
-using SchoolProject.ETL.Model.LogicClasses.Transform;
+﻿using SchoolProject.ETL.Model.LogicClasses.Transform;
+using SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs

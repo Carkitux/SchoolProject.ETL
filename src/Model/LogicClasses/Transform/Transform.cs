@@ -1,5 +1,4 @@
 ﻿using SchoolProject.ETL.Model.DataClasses;
-using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
 using SchoolProject.ETL.Model.Enums;
 using System;
 using System.Collections.Generic;
@@ -95,7 +94,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Transform
 
             foreach (var dataRow in TransformStObj.DataRows)
             {
-                var data = dataRow.DataRowCells.Where(x => x.Attribut == selectedAttribut).First();
+                var data = dataRow.DataRowCells.Where(x => x.Attribut.Name == selectedAttribut.Name).FirstOrDefault();
                 dataRow.DataRowCells.Remove(data);
             }
 

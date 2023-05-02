@@ -1,6 +1,5 @@
 ﻿using SchoolProject.ETL.Model.DataClasses;
 using SchoolProject.ETL.Model.LogicClasses.Transform;
-using SchoolProject.ETL.UI.WinFormsApp.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +8,7 @@ using System.Windows.Forms;
 
 //https://stackoverflow.com/questions/19692514/get-value-from-dialog-window
 
-namespace ETL_SFC_WindowsForms
+namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 {
     public partial class FormDialog2_TransferData : Form
     {
@@ -41,30 +40,42 @@ namespace ETL_SFC_WindowsForms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (listBox_QuellAttribute.SelectedItem is null)
+            if (listBox_QuellAttribute.SelectedItem is null && listBox_TransferFromTransform.SelectedItem is null)
             {
                 MessageBox.Show("Bitte wählen Sie die Zielspalte aus und die Quellspalte.");
                 return;
             }
 
-            listBox_TransferToTransform.Items.Add(listBox_QuellAttribute.SelectedItem);
-            listBox_QuellAttribute.Items.Remove(listBox_QuellAttribute.SelectedItem);
-
-            // ReCreateAndValidate();
+            if (!(listBox_QuellAttribute.SelectedItem is null))
+            {
+                listBox_TransferToTransform.Items.Add(listBox_QuellAttribute.SelectedItem);
+                listBox_QuellAttribute.Items.Remove(listBox_QuellAttribute.SelectedItem);
+            }
+            else if (!(listBox_TransferFromTransform.SelectedItem is null))
+            {
+                listBox_ZielAttribute.Items.Add(listBox_TransferFromTransform.SelectedItem);
+                listBox_TransferFromTransform.Items.Remove(listBox_TransferFromTransform.SelectedItem);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (listBox_ZielAttribute.SelectedItem is null)
+            if (listBox_ZielAttribute.SelectedItem is null && listBox_TransferToTransform.SelectedItem is null)
             {
-                MessageBox.Show("Bitte wählen Sie eine Quellattribut der Zielspalte aus das Sie entfernen möchten.");
+                MessageBox.Show("Bitte wählen Sie ein Quellattribut der Zielspalte aus das Sie entfernen möchten.");
                 return;
             }
 
-            listBox_TransferFromTransform.Items.Add(listBox_ZielAttribute.SelectedItem);
-            listBox_ZielAttribute.Items.Remove(listBox_ZielAttribute.SelectedItem);
-
-            // ReCreateAndValidate();
+            if (!(listBox_ZielAttribute.SelectedItem is null))
+            {
+                listBox_TransferFromTransform.Items.Add(listBox_ZielAttribute.SelectedItem);
+                listBox_ZielAttribute.Items.Remove(listBox_ZielAttribute.SelectedItem);
+            }
+            else if (!(listBox_TransferToTransform.SelectedItem is null))
+            {
+                listBox_QuellAttribute.Items.Add(listBox_TransferToTransform.SelectedItem);
+                listBox_TransferToTransform.Items.Remove(listBox_TransferToTransform.SelectedItem);
+            }
         }
 
         private void button_Ausfuehren_Click(object sender, EventArgs e)
@@ -128,6 +139,7 @@ namespace ETL_SFC_WindowsForms
 
         private void listBoxUpdate()
         {
+            listBox_TransferFromTransform.Items.Clear();
             listBox_QuellAttribute.Items.Clear();
             listBox_TransferToTransform.Items.Clear();
             listBox_ZielAttribute.Items.Clear();
@@ -144,7 +156,7 @@ namespace ETL_SFC_WindowsForms
             {
                 foreach (var sourceAttribut in attribut.WasTransferredFrom)
                 {
-                    listBox_ZielAttribute.Items.Add(sourceAttribut.Name);
+                    listBox_ZielAttribute.Items.Add(sourceAttribut.StagingObject.Name + " // " + sourceAttribut.Name);
                 }
             }
         }
@@ -172,6 +184,46 @@ namespace ETL_SFC_WindowsForms
         private void radioButton_Split_CheckedChanged(object sender, EventArgs e)
         {
             ReCreateAndValidate();
+        }
+
+        private void listBox_TransferFromTransform_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var currentListBox = (ListBox)sender;
+            if (currentListBox.SelectedItem is null)
+            {
+                return;
+            }
+            listBox_QuellAttribute.SelectedItem = null;
+        }
+
+        private void listBox_QuellAttribute_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var currentListBox = (ListBox)sender;
+            if (currentListBox.SelectedItem is null)
+            {
+                return;
+            }
+            listBox_TransferFromTransform.SelectedItem = null;
+        }
+
+        private void listBox_TransferToTransform_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var currentListBox = (ListBox)sender;
+            if (currentListBox.SelectedItem is null)
+            {
+                return;
+            }
+            listBox_ZielAttribute.SelectedItem = null;
+        }
+
+        private void listBox_ZielAttribute_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var currentListBox = (ListBox)sender;
+            if (currentListBox.SelectedItem is null)
+            {
+                return;
+            }
+            listBox_TransferToTransform.SelectedItem = null;
         }
     }
 }

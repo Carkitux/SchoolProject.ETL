@@ -1,4 +1,4 @@
-using ETL_SFC_WindowsForms;
+using SchoolProject.ETL.UI.WinFormsApp.View;
 using System;
 using System.Windows.Forms;
 

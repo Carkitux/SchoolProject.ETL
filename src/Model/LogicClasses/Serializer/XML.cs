@@ -1,7 +1,6 @@
 ﻿using System.Xml;
 using System.Linq;
 using SchoolProject.ETL.Model.Enums;
-using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
 using SchoolProject.ETL.Model.DataClasses;
 
 namespace SchoolProject.ETL.Model.LogicClasses.Serializer

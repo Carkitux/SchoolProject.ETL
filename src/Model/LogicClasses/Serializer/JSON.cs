@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SchoolProject.ETL.Model.DataClasses;
-using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
 using SchoolProject.ETL.Model.Enums;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace SchoolProject.ETL.Model.LogicClasses.Serializer
 {
@@ -57,7 +57,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
         public static void CreateJSON(string path)
         {
             // Das TranformStagingObjekt, in dem die transformierte Tabelle gespeichert ist
-            StagingObject stagingObject = StagingArea.StObjects[0]; //.Where(x => x.IamTransform).First();
+            var stagingObject = StagingArea.TransformStObject;
 
             var list = new List<JObject>();
             foreach (var datensatz in stagingObject.DataRows)
@@ -70,7 +70,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
                 list.Add(jObj);
             }
 
-            var json = JsonConvert.SerializeObject(list);
+            var json = JsonConvert.SerializeObject(list, Formatting.Indented);
 
             File.WriteAllText(path, json);
         }

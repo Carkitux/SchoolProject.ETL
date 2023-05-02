@@ -4,7 +4,7 @@ using SchoolProject.ETL.Model.Logging;
 using System;
 using System.Collections.Generic;
 
-namespace SchoolProject.ETL.Model.DataClasses.StagingObjectAgr
+namespace SchoolProject.ETL.Model.DataClasses
 {
     public class DataRow : BaseDataClass
     {

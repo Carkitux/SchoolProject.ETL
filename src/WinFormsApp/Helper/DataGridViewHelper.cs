@@ -1,6 +1,4 @@
-﻿using SchoolProject.ETL.Model.DataClasses.StagingObjectAgr;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using SchoolProject.ETL.Model.DataClasses;
 using System.Windows.Forms;
 
 namespace SchoolProject.ETL.UI.WinFormsApp.Helper

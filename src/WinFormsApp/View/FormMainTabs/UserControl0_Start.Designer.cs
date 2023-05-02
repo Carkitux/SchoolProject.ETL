@@ -1,4 +1,4 @@
-﻿namespace ETL_SFC_WindowsForms
+﻿namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 {
     partial class UserControl0_Start
     {
