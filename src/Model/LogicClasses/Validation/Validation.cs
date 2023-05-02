@@ -46,7 +46,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Validation
 
             return false;
         }
-
+        //
         //public static bool ValidateGeschlecht(string geschlecht)
         //{
 
