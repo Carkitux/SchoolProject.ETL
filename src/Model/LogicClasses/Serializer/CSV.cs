@@ -25,7 +25,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
             string fileName = Helper.GetFileName(path);
 
             // Erstellen des neuen StagingObjects
-            StagingObject stagingObject = new StagingObject(fileName);
+            var stagingObject = new StagingObject(fileName);
 
             // Befüllt das StagingObject mit allen Attributen und Zeilen der CSV
             CSVHeader(separator, hasHeader, lines, stagingObject);
@@ -45,10 +45,10 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
             lines = lines.Reverse().Skip(lines.Count() - lineCount).Reverse();
 
             // Lesen des Dateinamens aus dem übergebenen Dateipfad
-            string fileName = Helper.GetFileName(path);
+            var fileName = Helper.GetFileName(path);
 
             // Erstellen des temporären StagingObjects
-            StagingObject tempStagingObject = new StagingObject(fileName);
+            var tempStagingObject = new StagingObject(fileName);
 
             // Befüllt das temporäre StagingObject mit allen Attributen und den X Zeilen der CSV
             CSVHeader(separator, hasHeader, lines, tempStagingObject);
@@ -70,7 +70,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
                 var attribute = lines.First().Replace(separator + " ", separator).Split(separator);
                 foreach (var attributName in attribute)
                 {
-                    Attribut newAttribut = new Attribut(stagingObject, attributName, Datatyp.Unknown);
+                    var newAttribut = new Attribut(stagingObject, attributName, Datatyp.Unknown);
                     stagingObject.Attributes.Add(newAttribut);
                 }
             }
@@ -80,7 +80,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
                 var count = lines.First().Replace(separator + " ", separator).Split(separator).Count();
                 for (int i = 0; i < count; i++)
                 {
-                    Attribut newAttribut = new Attribut(stagingObject, $"Spalte{i}", Datatyp.Unknown);
+                    var newAttribut = new Attribut(stagingObject, $"Spalte{i}", Datatyp.Unknown);
                     stagingObject.Attributes.Add(newAttribut);
                 }
             }
@@ -89,19 +89,17 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
         private static void CSVLines(string separator, bool hasHeader, IEnumerable<string> lines, string dateiname, StagingObject stagingObject)
         {
             if (hasHeader)
-            {
                 lines = lines.Skip(1);
-            }
             foreach (var line in lines)
             {
                 // Erstellen eines neuen Datensatzes für jede Zeile der CSV
-                DataRow datensatz = new DataRow(stagingObject, dateiname, Filetyp.CSV);
+                var datensatz = new DataRow(stagingObject, dateiname, Filetyp.CSV);
 
                 // Splittet die Zeile nach dem übergeben Seperator in einzelne Felder zum einfügen in SingleData
-                string[] fields = line.Replace(separator + " ", separator).Split(separator);
+                var fields = line.Replace(separator + " ", separator).Split(separator);
 
                 // Zähler um das jeweilige Attribut zuweisen zu können
-                int currentFieldID = 0;
+                var currentFieldID = 0;
                 foreach (var field in fields)
                 {
                     DataRowCell singleData;

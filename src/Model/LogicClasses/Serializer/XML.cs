@@ -10,7 +10,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
         public static StagingObject LoadFromXmlFile(string path)
         {
             // Holt alle XML Objekte innerhalb der XML Datei und speichert sie in einem Dokument.
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             doc.Load(path);
 
             // Lesen des Dateinamens aus dem übergebenen Dateipfad
@@ -18,23 +18,23 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
             var filename = filepath[^1];
 
             // Erstellen des neuen StagingObjects
-            StagingObject stagingObject = new StagingObject(filename);
+            var stagingObject = new StagingObject(filename);
 
             foreach (XmlNode node in doc.DocumentElement.ChildNodes)
             {
                 // Erstellen eines neuen Datensatzes für jedes Objekt der XML
-                DataRow d = new DataRow(stagingObject, filename, Filetyp.XML);
+                var d = new DataRow(stagingObject, filename, Filetyp.XML);
 
                 foreach (XmlNode node2 in node.ChildNodes)
                 {
-                    Attribut attribut = stagingObject.Attributes.Where(x => x.Name == node2.Name).FirstOrDefault();
+                    var attribut = stagingObject.Attributes.Where(x => x.Name == node2.Name).FirstOrDefault();
                     if (attribut is null)
                     {
-                        Attribut newAttribut = new Attribut(stagingObject, node2.Name, Datatyp.Unknown);
+                        var newAttribut = new Attribut(stagingObject, node2.Name, Datatyp.Unknown);
                         stagingObject.Attributes.Add(newAttribut);
                         attribut = newAttribut;
                     }
-                    DataRowCell sd = new DataRowCell(d, attribut, node2.InnerText);
+                    var sd = new DataRowCell(d, attribut, node2.InnerText);
 
                     // Fügt das erstellte SingleData dem Datensatz hinzu
                     d.DataRowCells.Add(sd);

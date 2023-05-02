@@ -27,20 +27,20 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
             foreach (var jsonObject in jsonObjects)
             {
                 // Erstellt einen Datensatz mit einer ID, dem Type der eingelesenen Datei und der Liste der Key Value Paare.
-                DataRow datensatz = new DataRow(stagingObject, fileName, Filetyp.JSON);
+                var datensatz = new DataRow(stagingObject, fileName, Filetyp.JSON);
 
                 // Geht alle Properties eines JSON Objekt Datensatzes durch.
                 foreach (var property in jsonObject.Properties())
                 {
-                    Attribut attribut = stagingObject.Attributes.Where(x => x.Name == property.Name).FirstOrDefault();
+                    var attribut = stagingObject.Attributes.Where(x => x.Name == property.Name).FirstOrDefault();
                     if (attribut is null)
                     {
-                        Attribut newAttribut = new Attribut(stagingObject, property.Name, 0);
+                        var newAttribut = new Attribut(stagingObject, property.Name, 0);
                         stagingObject.Attributes.Add(newAttribut);
                         attribut = newAttribut;
                     }
                     // Erstellt ein neues SingleData Objekt
-                    DataRowCell singleData = new DataRowCell(datensatz, attribut, property.Value.ToString());
+                    var singleData = new DataRowCell(datensatz, attribut, property.Value.ToString());
 
                     // Fügt das Key Value Paar der Lise hinzu, um so eine Liste mit allen Paaren eines Json Datensatzes zu bekommen
                     datensatz.DataRowCells.Add(singleData);
