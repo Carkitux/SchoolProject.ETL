@@ -23,11 +23,6 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
         private UserControl activeMenuUserControl;
         private UserControl activeLeftMenuUserControl;
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button_ColumnMenu_Click(object sender, EventArgs e)
         {
             MenuUserControlSwitch(new UserControl2_Transform_TopMenu0_Columns(dataGridView1, panel4), (Button)sender);
@@ -66,7 +61,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
                 panel3.Visible = true;
             }
         }
-        //UserControl2Transform_LeftMenu1ColumnInfo
+
         private void dataGridView1_ColumnHeaderCellChanged(object sender, DataGridViewCellMouseEventArgs e)
         {
             StagingObject stagingObject = StagingArea.TransformStObject;

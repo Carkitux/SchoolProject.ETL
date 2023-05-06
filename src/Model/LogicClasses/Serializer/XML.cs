@@ -23,7 +23,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
             foreach (XmlNode node in doc.DocumentElement.ChildNodes)
             {
                 // Erstellen eines neuen Datensatzes für jedes Objekt der XML
-                var d = new DataRow(stagingObject, filename, Filetyp.XML);
+                var d = new DataRow(stagingObject, filename);
 
                 foreach (XmlNode node2 in node.ChildNodes)
                 {

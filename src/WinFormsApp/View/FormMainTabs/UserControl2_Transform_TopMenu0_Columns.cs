@@ -1,5 +1,5 @@
 ﻿using SchoolProject.ETL.Model.DataClasses;
-using SchoolProject.ETL.Model.LogicClasses.Transform;
+using SchoolProject.ETL.Model.LogicClasses;
 using SchoolProject.ETL.UI.WinFormsApp.Helper;
 using SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs;
 using System;
@@ -26,7 +26,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
             {
                 if (form4.ShowDialog(this) == DialogResult.OK)
                 {
-                    Transform.GenerateAllAttributes(form4.selectedStagingObjects);
+                    Transform.GenerateAttributes(form4.selectedStagingObjects);
 
                     UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
                     uc.ReCreateAndValidate();

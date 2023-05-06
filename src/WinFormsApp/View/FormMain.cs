@@ -63,6 +63,8 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View
             activeUserControl.Parent = panel1;
 
             oldUserControl.Dispose();
+
+            GC.Collect();
         }
     }
 }

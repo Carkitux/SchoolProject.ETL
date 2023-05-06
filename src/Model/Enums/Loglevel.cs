@@ -6,8 +6,7 @@ namespace SchoolProject.ETL.Model.Enums
 {
     public enum Loglevel
     {
-        Alles = 10,
-        Zusammenfassungen = 20,
-        Fehler = 30
+        Detailliert = 10,
+        Zusammengefasst = 20
     }
 }

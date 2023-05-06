@@ -1,5 +1,5 @@
 ﻿using SchoolProject.ETL.Model.Enums;
-using SchoolProject.ETL.Model.LogicClasses.Transform;
+using SchoolProject.ETL.Model.LogicClasses;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

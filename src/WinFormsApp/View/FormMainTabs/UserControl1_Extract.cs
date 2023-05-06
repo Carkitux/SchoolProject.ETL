@@ -80,7 +80,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
             StagingObject stagingObject = StagingArea.StObjects.Where(x => x.Name == tabControl1.SelectedTab.Text).FirstOrDefault();
 
             // Validiate
-            if (stagingObject.Attributes.Where(x => x.WasTransferredTo.Count >= 1).Count() >= 1)
+            if (stagingObject.Attributes.Where(x => x.TransferredTo.Count >= 1).Count() >= 1)
             {
                 MessageBox.Show("Von dieser Tabelle wurden bereits Daten transformiert.");
                 return;

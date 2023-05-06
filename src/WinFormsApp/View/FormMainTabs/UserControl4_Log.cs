@@ -16,8 +16,12 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
             InitializeComponent();
 
             comboBoxLoglevel.DataSource = Enum.GetValues(typeof(Loglevel));
+            SkipComboBoxLogLevel = true;
             comboBoxLoglevel.Text = LogWriter.applicationLoglevelString;
+            SkipComboBoxLogLevel = false;
         }
+
+        private bool SkipComboBoxLogLevel = true;
 
         private void buttonLogOeffnen_Click(object sender, EventArgs e)
         {
@@ -59,15 +63,10 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 
         private void comboBoxLoglevel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxLoglevel.Text == "Default")
+            if (SkipComboBoxLogLevel)
             {
                 return;
             }
-            if (LogWriter.applicationLoglevelString == comboBoxLoglevel.Text)
-            {
-                return;
-            }
-
             LogWriter.SetLoglevelConfig(comboBoxLoglevel.Text);
         }
     }

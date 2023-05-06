@@ -5,7 +5,6 @@ using System.Linq;
 using SchoolProject.ETL.Model.DataClasses;
 using SchoolProject.ETL.Model.Enums;
 using SchoolProject.ETL.Model.Logging;
-using SchoolProject.ETL.Model.LogicClasses;
 
 namespace SchoolProject.ETL.Model.LogicClasses.Serializer
 {
@@ -16,16 +15,13 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
 
         public static void LoadFromCSV(string path, string separator, bool hasHeader)
         {
-            LogWriter.LogHeader($"Step Extract - Startet Export CSV: \"{path}\"", Loglevel.Zusammenfassungen);
+            LogWriter.LogHeader($"Step Extract - Startet Export CSV: \"{path}\"", Loglevel.Zusammengefasst);
 
-            // Liest alle Zeilen der CSV Datei in einen String ein
-            var lines = File.ReadLines(path);
-
-            // Lesen des Dateinamens aus dem übergebenen Dateipfad
             string fileName = Helper.GetFileName(path);
-
-            // Erstellen des neuen StagingObjects
             var stagingObject = new StagingObject(fileName);
+
+            // Liest alle Zeilen der CSV Datei in ein IEnumerable ein
+            var lines = File.ReadLines(path);
 
             // Befüllt das StagingObject mit allen Attributen und Zeilen der CSV
             CSVHeader(separator, hasHeader, lines, stagingObject);
@@ -34,27 +30,21 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
             // Fügt das Staging Object unserer global verfügbaren Staging Area für spätere Benutzung hinzu
             StagingArea.StObjects.Add(stagingObject);
         }
-
         public static StagingObject LoadTempFromCSV(string path, string separator, bool hasHeader, int lineCount)
         {
-            // Logging ausschalten, da wir nur ein temporäes StagingObject erstellen für Userfeedback
             LogWriter.SkipLogging = true;
 
-            // Liest lediglich X Zeilen der CSV Datei in einen String ein
+            // Liest X Zeilen der CSV Datei in einen String ein
             var lines = File.ReadLines(path);
             lines = lines.Reverse().Skip(lines.Count() - lineCount).Reverse();
 
-            // Lesen des Dateinamens aus dem übergebenen Dateipfad
             var fileName = Helper.GetFileName(path);
-
-            // Erstellen des temporären StagingObjects
             var tempStagingObject = new StagingObject(fileName);
 
             // Befüllt das temporäre StagingObject mit allen Attributen und den X Zeilen der CSV
             CSVHeader(separator, hasHeader, lines, tempStagingObject);
             CSVLines(separator, hasHeader, lines, fileName, tempStagingObject);
 
-            // Logging wieder anschalten
             LogWriter.SkipLogging = false;
 
             // Gibt das temporäre StagingObject zur weiteren Verwendung zurück, da dieses diemsal nicht in die StagingArea integriert wird
@@ -85,7 +75,6 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
                 }
             }
         }
-
         private static void CSVLines(string separator, bool hasHeader, IEnumerable<string> lines, string dateiname, StagingObject stagingObject)
         {
             if (hasHeader)
@@ -93,7 +82,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
             foreach (var line in lines)
             {
                 // Erstellen eines neuen Datensatzes für jede Zeile der CSV
-                var datensatz = new DataRow(stagingObject, dateiname, Filetyp.CSV);
+                var datensatz = new DataRow(stagingObject, dateiname);
 
                 // Splittet die Zeile nach dem übergeben Seperator in einzelne Felder zum einfügen in SingleData
                 var fields = line.Replace(separator + " ", separator).Split(separator);

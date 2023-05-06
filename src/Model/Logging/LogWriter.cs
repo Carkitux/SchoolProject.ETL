@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Diagnostics;
 
 // Inspiration https://stackoverflow.com/questions/20185015/how-to-write-log-file-in-c
 
@@ -30,7 +31,7 @@ namespace SchoolProject.ETL.Model.Logging
             }
         }
 
-        public static string logPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + "Logs";
+        public static string logPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + "Logging";
         public static string logFile = $"Log {DateTime.Now.GetDateTimeFormats()[2]} {DateTime.Now.GetHashCode()}.txt";
         public static string filePath = logPath + "\\" + logFile;
         public static bool SkipLogging = false;
@@ -69,6 +70,8 @@ namespace SchoolProject.ETL.Model.Logging
 
         public static void Log(string logMessage, Loglevel loglevel)
         {
+            Debug.WriteLine("\t" + DateTime.Now + ": " + logMessage);
+
             if (SkipLogging)
             {
                 return;
@@ -85,6 +88,17 @@ namespace SchoolProject.ETL.Model.Logging
 
         public static void LogHeader(string logMessage, Loglevel loglevel)
         {
+            logMessage = DateTime.Now + ": " + logMessage;
+            string stringLine = string.Empty;
+            for (int i = 0; i < logMessage.Length; i++)
+            {
+                stringLine += "-";
+            }
+
+            Debug.WriteLine("\t");
+            Debug.WriteLine("\t" + logMessage);
+            Debug.WriteLine("\t" + stringLine);
+
             if (SkipLogging)
             {
                 return;
@@ -94,13 +108,6 @@ namespace SchoolProject.ETL.Model.Logging
             if (!(applicationLoglevel <= loglevel))
             {
                 return;
-            }
-
-            logMessage = DateTime.Now + ": " + logMessage;
-            string stringLine = string.Empty;
-            for (int i = 0; i < logMessage.Length; i++)
-            {
-                stringLine += "-";
             }
 
             WriteInFile("\t");

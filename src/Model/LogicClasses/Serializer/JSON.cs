@@ -13,21 +13,17 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
     {
         public static StagingObject LoadFromJson(string path)
         {
+            string fileName = Helper.GetFileName(path);
+            var stagingObject = new StagingObject(fileName);
+
             // Holt alle JSON Objekte innerhalb der JSON Datei und speichert sie in einer Liste.
             var json = File.ReadAllText(path);
             var jsonObjects = JsonConvert.DeserializeObject<List<JObject>>(json);
 
-            // Lesen des Dateinamens aus dem übergebenen Dateipfad
-            var filePath = path.Split('\\');
-            var fileName = filePath[^1];
-
-            // Erstellen des neuen StagingObjects
-            StagingObject stagingObject = new StagingObject(fileName);
-
             foreach (var jsonObject in jsonObjects)
             {
                 // Erstellt einen Datensatz mit einer ID, dem Type der eingelesenen Datei und der Liste der Key Value Paare.
-                var datensatz = new DataRow(stagingObject, fileName, Filetyp.JSON);
+                var datensatz = new DataRow(stagingObject, fileName);
 
                 // Geht alle Properties eines JSON Objekt Datensatzes durch.
                 foreach (var property in jsonObject.Properties())

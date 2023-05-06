@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace SchoolProject.ETL.Model.LogicClasses.Validation
+namespace SchoolProject.ETL.Model.LogicClasses
 {
     public class Validation
     {
@@ -46,7 +46,5 @@ namespace SchoolProject.ETL.Model.LogicClasses.Validation
 
             return false;
         }
-        //
-       
     }
 }

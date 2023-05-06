@@ -1,4 +1,4 @@
-﻿using SchoolProject.ETL.Model.LogicClasses.Transform;
+﻿using SchoolProject.ETL.Model.LogicClasses;
 using SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs;
 using System;
 using System.Windows.Forms;
@@ -15,9 +15,21 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 
         private void button_DataTransferAutomatic_Click(object sender, EventArgs e)
         {
-            Transform.AutomaticAllDataTransfer();
-            UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
-            uc.ReCreateAndValidate();
+            var labelText = "ACHTUNG!" +
+                "\r\nEs werden alle bisherigen Datenzuweisungen zurückgesetzt!";
+            using (var form3 = new FormDialog3_Confirmation(labelText))
+            {
+                if (form3.ShowDialog(this) == DialogResult.OK)
+                {
+                    Transform.AutomaticDataTransfer();
+                    UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
+                    uc.ReCreateAndValidate();
+                }
+                else
+                {
+
+                }
+            }
         }
 
         private void button_DataTransferManual_Click(object sender, EventArgs e)
@@ -31,7 +43,8 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
                 }
                 else
                 {
-
+                    UserControl2_Transform uc = (UserControl2_Transform)Parent.Parent;
+                    uc.ReCreateAndValidate();
                 }
             }
         }

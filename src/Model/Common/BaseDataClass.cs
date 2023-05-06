@@ -4,11 +4,13 @@ namespace SchoolProject.ETL.Model.Common
 {
     public abstract class BaseDataClass
     {
+        // Constructors
         public BaseDataClass()
         {
 
         }
 
-        public Guid ID { get; set; } = Guid.NewGuid();
+        // Propertys
+        public Guid ID { get; internal set; } = Guid.NewGuid();
     }
 }

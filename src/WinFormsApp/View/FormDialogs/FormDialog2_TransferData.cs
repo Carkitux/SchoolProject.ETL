@@ -1,5 +1,5 @@
 ﻿using SchoolProject.ETL.Model.DataClasses;
-using SchoolProject.ETL.Model.LogicClasses.Transform;
+using SchoolProject.ETL.Model.LogicClasses;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -31,8 +31,6 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             ReCreateAndValidate();
         }
 
-        string ZielAttribut;
-
         private void button_Reset_Click(object sender, EventArgs e)
         {
             ReCreateAndValidate();
@@ -42,7 +40,14 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
         {
             if (listBox_QuellAttribute.SelectedItem is null && listBox_TransferFromTransform.SelectedItem is null)
             {
-                MessageBox.Show("Bitte wählen Sie die Zielspalte aus und die Quellspalte.");
+                return;
+            }
+            if ((radioButton_Transfer.Checked || radioButton_Merge.Checked) && listBox_TransferToTransform.Items.Count >= 1)
+            {
+                return;
+            }
+            if (radioButton_Merge.Checked && listBox_TransferToTransform.Items.Count >= 2)
+            {
                 return;
             }
 
@@ -62,7 +67,6 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
         {
             if (listBox_ZielAttribute.SelectedItem is null && listBox_TransferToTransform.SelectedItem is null)
             {
-                MessageBox.Show("Bitte wählen Sie ein Quellattribut der Zielspalte aus das Sie entfernen möchten.");
                 return;
             }
 
@@ -71,7 +75,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
                 listBox_TransferFromTransform.Items.Add(listBox_ZielAttribute.SelectedItem);
                 listBox_ZielAttribute.Items.Remove(listBox_ZielAttribute.SelectedItem);
             }
-            else if (!(listBox_TransferToTransform.SelectedItem is null))
+            else if (!(listBox_TransferToTransform is null))
             {
                 listBox_QuellAttribute.Items.Add(listBox_TransferToTransform.SelectedItem);
                 listBox_TransferToTransform.Items.Remove(listBox_TransferToTransform.SelectedItem);
@@ -80,7 +84,12 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 
         private void button_Ausfuehren_Click(object sender, EventArgs e)
         {
+            var stageObject = StagingArea.StObjects.Where(x => x.Name == comboBox_QuellStObj.SelectedItem).FirstOrDefault();
+            List<string> attributes = new List<string>();
+            foreach (var item in listBox_TransferToTransform.Items) { attributes.Add(item.ToString().Split(" // ")[1]); }
+            var targetTrasnformAttribut = StagingArea.TransformStObject.Attributes.Where(x => x.Name == comboBox_ZielAttribut.SelectedItem).FirstOrDefault();
 
+            Transform.DataTransfer(stageObject.Name, attributes, targetTrasnformAttribut.Name);
 
             ReCreateAndValidate();
         }
@@ -107,7 +116,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
                 {
                     asd.Add(item[1]);
                 }
-                Transform.DataTransfer(group.Key, asd, ZielAttribut);
+                //Transform.DataTransfer(group.Key, asd, "");
             }
 
             this.DialogResult = DialogResult.OK;
@@ -146,7 +155,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 
             foreach (var stagingObject in StagingArea.StObjects.Where(x => x.Name == comboBox_QuellStObj.SelectedItem?.ToString()))
             {
-                foreach (var attribut in stagingObject.Attributes.Where(x => x.WasTransferredTo.Count == 0).ToList())
+                foreach (var attribut in stagingObject.Attributes.Where(x => x.TransferredTo.Count == 0).ToList())
                 {
                     listBox_QuellAttribute.Items.Add(stagingObject.Name + " // " + attribut.Name);
                 }
@@ -154,9 +163,9 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 
             foreach (var attribut in StagingArea.TransformStObject.Attributes.Where(x => x.Name == comboBox_ZielAttribut.SelectedItem?.ToString()))
             {
-                foreach (var sourceAttribut in attribut.WasTransferredFrom)
+                foreach (var sourceAttribut in attribut.TransferredFrom)
                 {
-                    listBox_ZielAttribute.Items.Add(sourceAttribut.StagingObject.Name + " // " + sourceAttribut.Name);
+                    listBox_ZielAttribute.Items.Add(sourceAttribut);
                 }
             }
         }

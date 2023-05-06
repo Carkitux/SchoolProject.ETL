@@ -37,9 +37,9 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
         {
             listBoxDataSourceStjObj.Items.Clear();
 
-            foreach (var attribut in StagingArea.TransformStObject.Attributes.Where(x => x == selectedAttribut).First().WasTransferredFrom)
+            foreach (var attribut in StagingArea.TransformStObject.Attributes.Where(x => x == selectedAttribut).First().TransferredFrom)
             {
-                listBoxDataSourceStjObj.Items.Add(attribut.StagingObject.Name + " // " + attribut.Name);
+                listBoxDataSourceStjObj.Items.Add(attribut);
             }
         }
     }

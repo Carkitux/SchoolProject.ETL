@@ -36,9 +36,10 @@
             // 
             // button_Okay
             // 
-            button_Okay.Location = new System.Drawing.Point(176, 138);
+            button_Okay.Location = new System.Drawing.Point(88, 129);
+            button_Okay.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             button_Okay.Name = "button_Okay";
-            button_Okay.Size = new System.Drawing.Size(150, 46);
+            button_Okay.Size = new System.Drawing.Size(81, 22);
             button_Okay.TabIndex = 0;
             button_Okay.Text = "Okay";
             button_Okay.UseVisualStyleBackColor = true;
@@ -46,9 +47,10 @@
             // 
             // button_Cancel
             // 
-            button_Cancel.Location = new System.Drawing.Point(332, 138);
+            button_Cancel.Location = new System.Drawing.Point(173, 129);
+            button_Cancel.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             button_Cancel.Name = "button_Cancel";
-            button_Cancel.Size = new System.Drawing.Size(150, 46);
+            button_Cancel.Size = new System.Drawing.Size(81, 22);
             button_Cancel.TabIndex = 1;
             button_Cancel.Text = "Abbrechen";
             button_Cancel.UseVisualStyleBackColor = true;
@@ -57,30 +59,33 @@
             // comboBox_stagingObject
             // 
             comboBox_stagingObject.FormattingEnabled = true;
-            comboBox_stagingObject.Location = new System.Drawing.Point(12, 92);
+            comboBox_stagingObject.Location = new System.Drawing.Point(5, 102);
+            comboBox_stagingObject.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             comboBox_stagingObject.Name = "comboBox_stagingObject";
-            comboBox_stagingObject.Size = new System.Drawing.Size(470, 40);
+            comboBox_stagingObject.Size = new System.Drawing.Size(255, 23);
             comboBox_stagingObject.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(12, 15);
+            label1.Location = new System.Drawing.Point(6, 8);
+            label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(429, 64);
+            label1.Size = new System.Drawing.Size(253, 90);
             label1.TabIndex = 3;
-            label1.Text = "Wählen Sie die Quelldatenquelle aus,\r\nderen Spalten Sie übernehmen wollen.";
+            label1.Text = "Wählen Sie die Quelldatenquelle aus,\r\nderen Spalten Sie übernehmen wollen.\r\n\r\nACHTUNG!\r\nEs werden alle bereits erstellte Spalten gelöscht\r\nund Datenzuweisungen zurückgesetzt!";
             // 
             // FormDialog4_GenerateColumns
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(492, 192);
-            Controls.Add(label1);
+            ClientSize = new System.Drawing.Size(265, 158);
             Controls.Add(comboBox_stagingObject);
             Controls.Add(button_Cancel);
             Controls.Add(button_Okay);
+            Controls.Add(label1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormDialog4_GenerateColumns";
