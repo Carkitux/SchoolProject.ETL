@@ -117,6 +117,17 @@ namespace SchoolProject.ETL.Model.Logging
 
         public static void LogFooter(string logMessage, Loglevel loglevel)
         {
+            logMessage = DateTime.Now + ": " + logMessage;
+            string stringLine = string.Empty;
+            for (int i = 0; i < logMessage.Length; i++)
+            {
+                stringLine += "-";
+            }
+
+            Debug.WriteLine("\t" + stringLine);
+            Debug.WriteLine("\t" + logMessage);
+            Debug.WriteLine("\t");
+
             if (SkipLogging)
             {
                 return;
@@ -126,13 +137,6 @@ namespace SchoolProject.ETL.Model.Logging
             if (!(applicationLoglevel <= loglevel))
             {
                 return;
-            }
-
-            logMessage = DateTime.Now + ": " + logMessage;
-            string stringLine = string.Empty;
-            for (int i = 0; i < logMessage.Length; i++)
-            {
-                stringLine += "-";
             }
 
             WriteInFile("\t" + stringLine);

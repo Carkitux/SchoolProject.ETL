@@ -23,18 +23,18 @@ namespace SchoolProject.ETL.Model.LogicClasses
             foreach (var sourceDataRows in sourceStObj.DataRows)
             {
                 var sourceCells = sourceDataRows.DataRowCells.Where(x => sourceAttributeList.Where(y => y.Name == x.Attribut.Name).Count() > 0).ToList();
-                string quellInhalt = Merge(sourceCells);
+                string sourceValue = Merge(sourceCells);
 
                 DataRow transformDataRow = TransformStObj.DataRows.Where(x => x.SourceFileName == sourceDataRows.SourceFileName && x.ID == sourceDataRows.ID).FirstOrDefault();
                 DataRowCell newCell;
                 if (transformDataRow is null)
                 {
                     transformDataRow = TransformStObj.CreateDataRow(sourceDataRows.ID, sourceDataRows.SourceFileName);
-                    newCell = transformDataRow.CreateCell(targetAttribut, quellInhalt);
+                    newCell = transformDataRow.CreateCell(targetAttribut, sourceValue);
                 }
                 else
                 {
-                    newCell = transformDataRow.CreateCell(targetAttribut, quellInhalt);
+                    newCell = transformDataRow.CreateCell(targetAttribut, sourceValue);
                 }
 
                 newCell.Attribut.AddTransferredAttributes(targetAttribut);
@@ -90,10 +90,10 @@ namespace SchoolProject.ETL.Model.LogicClasses
 
         //}
 
-        public static void CreateAttribut(string columnName, Datatyp datentyp)
+        public static void CreateAttribut(string columnName, Datatyp datatyp)
         {
             var TransformStObj = StagingArea.TransformStObject;
-            TransformStObj.CreateAttribut(columnName, datentyp);
+            TransformStObj.CreateAttribut(columnName, datatyp);
         }
         public static void DeleteAttribut(string name)
         {

@@ -53,7 +53,7 @@
             button_DataValidateMenu.Name = "button_DataValidateMenu";
             button_DataValidateMenu.Size = new System.Drawing.Size(127, 49);
             button_DataValidateMenu.TabIndex = 2;
-            button_DataValidateMenu.Text = "Validieren\r\nMenü";
+            button_DataValidateMenu.Text = "Validierung";
             button_DataValidateMenu.UseVisualStyleBackColor = false;
             button_DataValidateMenu.Click += button_DataValidateMenu_Click;
             // 
@@ -69,7 +69,7 @@
             button_DataTransferMenu.Name = "button_DataTransferMenu";
             button_DataTransferMenu.Size = new System.Drawing.Size(127, 49);
             button_DataTransferMenu.TabIndex = 1;
-            button_DataTransferMenu.Text = "Datentransfer\r\nMenü";
+            button_DataTransferMenu.Text = "Daten";
             button_DataTransferMenu.UseVisualStyleBackColor = false;
             button_DataTransferMenu.Click += button_DataTransferMenu_Click;
             // 
@@ -108,7 +108,7 @@
             button_ColumnMenu.Name = "button_ColumnMenu";
             button_ColumnMenu.Size = new System.Drawing.Size(127, 49);
             button_ColumnMenu.TabIndex = 3;
-            button_ColumnMenu.Text = "Spalten\r\nMenü";
+            button_ColumnMenu.Text = "Tabelle";
             button_ColumnMenu.UseVisualStyleBackColor = false;
             button_ColumnMenu.Click += button_ColumnMenu_Click;
             // 
@@ -164,7 +164,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button_DataTransferMenu;
         private System.Windows.Forms.Button button_DataValidateMenu;
         private System.Windows.Forms.Panel panel1;
@@ -173,5 +172,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button_ColumnMenu;
+        public System.Windows.Forms.DataGridView dataGridView1;
     }
 }

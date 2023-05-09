@@ -43,19 +43,19 @@ namespace SchoolProject.ETL.Model.DataClasses
                 .SelectMany(x => x.Attributes)
                 .Where(x => x.TransferredTo.Contains($"{StagingObject.Name} // {Name}"))
                 .ToList();
-            allAttributes.RemoveAll(x => x.TransferredTo.Contains($"{StagingObject.Name} // {Name}"));
-            //foreach (var attribute in allAttributes)
-            //{
-            //    attribute.TransferredFrom.Remove($"{StagingObject.Name} // {Name}");
-            //}
-            //if (this.TransferredTo.Contains($"{targetAttribut.StagingObject.Name} // {targetAttribut.Name}"))
-            //{
-            //    this.TransferredTo.Remove($"{targetAttribut.StagingObject.Name} // {targetAttribut.Name}");
-            //}
-            //if (targetAttribut.TransferredFrom.Contains($"{StagingObject.Name} // {Name}"))
-            //{
-            //    targetAttribut.TransferredFrom.Remove($"{StagingObject.Name} // {Name}");
-            //}
+            foreach (var attribute in allAttributes)
+            {
+                attribute.TransferredTo.Remove($"{StagingObject.Name} // {Name}");
+            }
+        }
+
+        public List<DataRowCell> GetDataRowCells()
+        {
+            var list = StagingObject.DataRows
+                .SelectMany(x => x.DataRowCells)
+                .Where(y => y.Attribut.Equals(this))
+                .ToList();
+            return list;
         }
 
         public override string ToString()

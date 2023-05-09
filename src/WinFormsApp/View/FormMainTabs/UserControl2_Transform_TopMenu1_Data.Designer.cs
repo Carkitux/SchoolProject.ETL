@@ -30,6 +30,8 @@
         {
             button_DataTransferAutomatic = new System.Windows.Forms.Button();
             button_DataTransferManual = new System.Windows.Forms.Button();
+            button1 = new System.Windows.Forms.Button();
+            button2 = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // button_DataTransferAutomatic
@@ -58,15 +60,45 @@
             button_DataTransferManual.Name = "button_DataTransferManual";
             button_DataTransferManual.Size = new System.Drawing.Size(127, 49);
             button_DataTransferManual.TabIndex = 6;
-            button_DataTransferManual.Text = "Manueller\r\nDatentransfer";
+            button_DataTransferManual.Text = "Daten\r\ntransferieren";
             button_DataTransferManual.UseVisualStyleBackColor = false;
             button_DataTransferManual.Click += button_DataTransferManual_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = System.Drawing.Color.WhiteSmoke;
+            button1.Dock = System.Windows.Forms.DockStyle.Left;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button1.Font = new System.Drawing.Font("Eras Demi ITC", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            button1.Location = new System.Drawing.Point(254, 0);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(127, 49);
+            button1.TabIndex = 7;
+            button1.Text = "Daten\r\nzusammenfassen";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            button2.BackColor = System.Drawing.Color.WhiteSmoke;
+            button2.Dock = System.Windows.Forms.DockStyle.Left;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button2.Font = new System.Drawing.Font("Eras Demi ITC", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            button2.Location = new System.Drawing.Point(381, 0);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(127, 49);
+            button2.TabIndex = 8;
+            button2.Text = "Daten\r\nsplitten";
+            button2.UseVisualStyleBackColor = false;
             // 
             // UserControl2_Transform_TopMenu1_Data
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.WhiteSmoke;
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(button_DataTransferManual);
             Controls.Add(button_DataTransferAutomatic);
             Name = "UserControl2_Transform_TopMenu1_Data";
@@ -78,5 +110,7 @@
 
         private System.Windows.Forms.Button button_DataTransferAutomatic;
         private System.Windows.Forms.Button button_DataTransferManual;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
