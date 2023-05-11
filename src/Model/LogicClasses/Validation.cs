@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using SchoolProject.ETL.Model.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -8,16 +10,33 @@ namespace SchoolProject.ETL.Model.LogicClasses
 {
     public class Validation
     {
-        public static bool ValidateEMail(string eMail)
+        private static bool Skip(DataRowCell cell, string value)
         {
-            if (string.IsNullOrEmpty(eMail))
-            { 
-                return true; 
+            if (cell.ValidationStatus != Enums.ValidationStatus.Default || string.IsNullOrEmpty(value))
+            {
+                return true;
             }
-
-            return Regex.IsMatch(eMail, @"^[^@.]+(.[^@.]+)?@[^@]+.[^@.]+$");
+            else
+            {
+                return false;
+            }
         }
 
+        public static bool ValidateEMail(DataRowCell cell, string value)
+        {
+            if (Skip(cell, value))
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(value, @"^[^@.]+(.[^@.]+)?@[^@]+.[^@.]+$"))
+            { 
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public static bool ValidateInteger(string integer)
         {
             if (string.IsNullOrEmpty(integer))
@@ -27,7 +46,6 @@ namespace SchoolProject.ETL.Model.LogicClasses
 
             return int.TryParse(integer, out int value);
         }
-
         public static bool ValidatePostleitzahl(string postleitzahl)
         {
             if (string.IsNullOrEmpty(postleitzahl))
@@ -37,7 +55,6 @@ namespace SchoolProject.ETL.Model.LogicClasses
 
             return postleitzahl.Length == 5;
         }
-
         public static bool ValidateBoolean(string boolean)
         {
             if (string.IsNullOrEmpty(boolean))
@@ -55,7 +72,6 @@ namespace SchoolProject.ETL.Model.LogicClasses
                 return false;
             else return false;
         }
-
         public static bool ValidateDate(string date)
         {
             if (string.IsNullOrEmpty(date))

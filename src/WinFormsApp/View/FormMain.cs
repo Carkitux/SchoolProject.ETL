@@ -11,7 +11,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View
         {
             InitializeComponent();
 
-            activeUserControl = new UserControl0_Start();
+            activeUserControl = new UC0Start();
             activeUserControl.Dock = DockStyle.Fill;
             activeUserControl.Parent = panel1;
         }
@@ -20,22 +20,22 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View
 
         private void button2_Click(object sender, EventArgs e)
         {
-            UserControlSwitch(new UserControl1_Extract(), (Button)sender);
+            UserControlSwitch(new UC1Extract(), (Button)sender);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            UserControlSwitch(new UserControl2_Transform(), (Button)sender);
+            UserControlSwitch(new UC2Transform(), (Button)sender);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            UserControlSwitch(new UserControl3_Load(), (Button)sender);
+            UserControlSwitch(new UC3Load(), (Button)sender);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            UserControlSwitch(new UserControl4_Log(), (Button)sender);
+            UserControlSwitch(new UC4Log(), (Button)sender);
         }
 
         private void UserControlSwitch(UserControl newUserConrol, Button currentButton)
@@ -52,7 +52,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View
             if (oldUserControl?.Name == newUserConrol.Name)
             {
                 newUserConrol.Dispose();
-                activeUserControl = new UserControl0_Start();
+                activeUserControl = new UC0Start();
             }
             else
             {

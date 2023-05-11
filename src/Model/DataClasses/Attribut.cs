@@ -48,8 +48,13 @@ namespace SchoolProject.ETL.Model.DataClasses
                 attribute.TransferredTo.Remove($"{StagingObject.Name} // {Name}");
             }
         }
+        public void Edit(string newName, Datatyp newDatatyp)
+        {
+            Name = newName;
+            Datatyp = newDatatyp;
+        }
 
-        public List<DataRowCell> GetDataRowCells()
+        public List<DataRowCell> GetAssociatedDataRowCells()
         {
             var list = StagingObject.DataRows
                 .SelectMany(x => x.DataRowCells)

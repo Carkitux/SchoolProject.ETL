@@ -30,7 +30,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
                     var attribut = stagingObject.Attributes.Where(x => x.Name == node2.Name).FirstOrDefault();
                     if (attribut is null)
                     {
-                        var newAttribut = new Attribut(stagingObject, node2.Name, Datatyp.Unknown);
+                        var newAttribut = new Attribut(stagingObject, node2.Name, Datatyp.unknown);
                         stagingObject.Attributes.Add(newAttribut);
                         attribut = newAttribut;
                     }
@@ -52,7 +52,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
         public static void CreateXML(string path)
         {
             // Objekt, in dem die transformierte Tabelle gespeichert ist.
-            var stagingObject = StagingArea.StObjects[0];
+            var stagingObject = StagingArea.TransformStObject;
 
             // Erstellung des Dokumentes und der Deklaration.
             var xmlDocument = new XmlDocument();

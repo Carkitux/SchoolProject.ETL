@@ -113,7 +113,7 @@ namespace SchoolProject.ETL.Model.LogicClasses
                     {
                         continue;
                     }
-                    TransformStObj.CreateAttribut(stObjattribut.Name, Datatyp.Unknown);
+                    TransformStObj.CreateAttribut(stObjattribut.Name, Datatyp.unknown);
                 }
             }
         }

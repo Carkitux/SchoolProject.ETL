@@ -60,7 +60,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
                 var attribute = lines.First().Replace(separator + " ", separator).Split(separator);
                 foreach (var attributName in attribute)
                 {
-                    var newAttribut = new Attribut(stagingObject, attributName, Datatyp.Unknown);
+                    var newAttribut = new Attribut(stagingObject, attributName, Datatyp.unknown);
                     stagingObject.Attributes.Add(newAttribut);
                 }
             }
@@ -70,7 +70,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
                 var count = lines.First().Replace(separator + " ", separator).Split(separator).Count();
                 for (int i = 0; i < count; i++)
                 {
-                    var newAttribut = new Attribut(stagingObject, $"Spalte{i}", Datatyp.Unknown);
+                    var newAttribut = new Attribut(stagingObject, $"Spalte{i}", Datatyp.unknown);
                     stagingObject.Attributes.Add(newAttribut);
                 }
             }

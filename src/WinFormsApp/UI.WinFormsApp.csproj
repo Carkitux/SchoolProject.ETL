@@ -17,6 +17,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="View\FormDialogs\FormDialogDataMerge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\FormDialogs\FormDialogDataSplit.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

@@ -21,11 +21,8 @@ namespace SchoolProject.ETL.Model.Logging
             if (!Directory.Exists(logPath))
                 Directory.CreateDirectory(logPath);
 
-            bool doNewLine = File.Exists(filePath);
             using (StreamWriter textWriter = File.AppendText(filePath))
             {
-                if (doNewLine)
-                    textWriter.WriteLine("");
                 textWriter.WriteLine($"Started new Log from {DateTime.Now}:");
                 textWriter.WriteLine("-----------------------------------------");
             }
@@ -40,7 +37,6 @@ namespace SchoolProject.ETL.Model.Logging
         {
             get { return Directory.GetFiles(logPath).Length; }
         }
-
         public static float FileSizeMBAll
         {
             get
@@ -55,7 +51,6 @@ namespace SchoolProject.ETL.Model.Logging
                 return fileSize;
             }
         }
-
         public static float FileSizeMBCurrent
         {
             get
@@ -70,8 +65,6 @@ namespace SchoolProject.ETL.Model.Logging
 
         public static void Log(string logMessage, Loglevel loglevel)
         {
-            Debug.WriteLine("\t" + DateTime.Now + ": " + logMessage);
-
             if (SkipLogging)
             {
                 return;
@@ -84,21 +77,10 @@ namespace SchoolProject.ETL.Model.Logging
             }
 
             WriteInFile("\t" + DateTime.Now + ": " + logMessage);
+            Debug.WriteLine("\t" + DateTime.Now + ": " + logMessage);
         }
-
         public static void LogHeader(string logMessage, Loglevel loglevel)
         {
-            logMessage = DateTime.Now + ": " + logMessage;
-            string stringLine = string.Empty;
-            for (int i = 0; i < logMessage.Length; i++)
-            {
-                stringLine += "-";
-            }
-
-            Debug.WriteLine("\t");
-            Debug.WriteLine("\t" + logMessage);
-            Debug.WriteLine("\t" + stringLine);
-
             if (SkipLogging)
             {
                 return;
@@ -110,24 +92,22 @@ namespace SchoolProject.ETL.Model.Logging
                 return;
             }
 
+            logMessage = DateTime.Now + ": " + logMessage;
+            string stringLine = string.Empty;
+            for (int i = 0; i < logMessage.Length; i++)
+            {
+                stringLine += "-";
+            }
+
             WriteInFile("\t");
             WriteInFile("\t" + logMessage);
             WriteInFile("\t" + stringLine);
+            Debug.WriteLine("\t");
+            Debug.WriteLine("\t" + logMessage);
+            Debug.WriteLine("\t" + stringLine);
         }
-
         public static void LogFooter(string logMessage, Loglevel loglevel)
         {
-            logMessage = DateTime.Now + ": " + logMessage;
-            string stringLine = string.Empty;
-            for (int i = 0; i < logMessage.Length; i++)
-            {
-                stringLine += "-";
-            }
-
-            Debug.WriteLine("\t" + stringLine);
-            Debug.WriteLine("\t" + logMessage);
-            Debug.WriteLine("\t");
-
             if (SkipLogging)
             {
                 return;
@@ -139,9 +119,19 @@ namespace SchoolProject.ETL.Model.Logging
                 return;
             }
 
+            logMessage = DateTime.Now + ": " + logMessage;
+            string stringLine = string.Empty;
+            for (int i = 0; i < logMessage.Length; i++)
+            {
+                stringLine += "-";
+            }
+
             WriteInFile("\t" + stringLine);
             WriteInFile("\t" + logMessage);
             WriteInFile("\t");
+            Debug.WriteLine("\t" + stringLine);
+            Debug.WriteLine("\t" + logMessage);
+            Debug.WriteLine("\t");
         }
 
         private static void WriteInFile(string logMessage)
@@ -187,15 +177,6 @@ namespace SchoolProject.ETL.Model.Logging
 
             return lastLines;
         }
-
-        private static string GetLoglevelConfig()
-        {
-            var json = File.ReadAllText("Logging\\LogConfiguration.json");
-            var jsonObject = JsonConvert.DeserializeObject<JObject>(json);
-            applicationLoglevelString = (string)jsonObject.GetValue("Loglevel");
-            return applicationLoglevelString;
-        }
-
         public static void SetLoglevelConfig(string loglevel)
         {
             var logConfigPath = "Logging\\LogConfiguration.json";
@@ -207,6 +188,13 @@ namespace SchoolProject.ETL.Model.Logging
 
             var jsonWrite = JsonConvert.SerializeObject(jsonObject, Formatting.Indented);
             File.WriteAllText(logConfigPath, jsonWrite);
+        }
+        private static string GetLoglevelConfig()
+        {
+            var json = File.ReadAllText("Logging\\LogConfiguration.json");
+            var jsonObject = JsonConvert.DeserializeObject<JObject>(json);
+            applicationLoglevelString = (string)jsonObject.GetValue("Loglevel");
+            return applicationLoglevelString;
         }
     }
 }

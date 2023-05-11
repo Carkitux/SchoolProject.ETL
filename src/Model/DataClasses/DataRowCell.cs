@@ -39,5 +39,6 @@ namespace SchoolProject.ETL.Model.DataClasses
             }
         }
         public string Value { get; }
+        public ValidationStatus ValidationStatus { get; set; } = ValidationStatus.Default;
     }
 }

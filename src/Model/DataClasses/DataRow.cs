@@ -50,7 +50,6 @@ namespace SchoolProject.ETL.Model.DataClasses
                 targetAttribut.AddTransferredAttributes(cell.Attribut);
 
                 var newCell = CreateCell(targetAttribut, cell.Value);
-                DataRowCells.Add(newCell);
             }
         }
         public DataRowCell GetDataRowCell(Attribut attribut)

@@ -2,11 +2,12 @@
 {
     public enum Datatyp
     {
-        Unknown = 0,
-        Integer = 10,
-        String = 20,
-        Boolean = 30,
-        EMail = 31,
-        Date = 32,
+        unknown = 0,
+        ganzzahl = 10,
+        kommazahl = 20,
+        text = 30,
+        boolean = 40,
+        email = 50,
+        datum = 60,
     }
 }
