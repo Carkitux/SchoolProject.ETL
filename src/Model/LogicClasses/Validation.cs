@@ -17,73 +17,17 @@ namespace SchoolProject.ETL.Model.LogicClasses
             foreach (var attribut in stagingObject.Attributes)
             {
                 var cells = attribut.GetAssociatedDataRowCells();
-                switch (attribut.Datatyp)
+
+                foreach (var cell in cells)
                 {
-                    case Datatyp.ganzzahl:
-                        foreach (var cell in cells)
-                        {
-                            if (!ValidateInteger(cell, cell.Value))
-                            {
-                                failedCells.Add(cell);
-                            }                       
-                        }
-                        break;
-                    case Datatyp.kommazahl:
-                        foreach (var cell in cells)
-                        {
-                            if (!ValidateDecimal(cell, cell.Value))
-                            {
-                                failedCells.Add(cell);
-                            }
-                        }
-                        break;
-                    case Datatyp.text:
-                        foreach (var cell in cells)
-                        {
-                            if (!ValidateTextLength(cell, cell.Value, attribut.MaxLength))
-                            {
-                                failedCells.Add(cell);
-                            }
-                        }
-                        break;
-                    case Datatyp.boolean:
-                        foreach (var cell in cells)
-                        {
-                            if (!ValidateBoolean(cell, cell.Value))
-                            {
-                                failedCells.Add(cell);
-                            }
-                        }
-                        break;
-                    case Datatyp.email:
-                        foreach (var cell in cells)
-                        {
-                            if (!ValidateEMail(cell, cell.Value))
-                            {
-                                failedCells.Add(cell);
-                            }
-                        }
-                        break;
-                    case Datatyp.datum:
-                        foreach (var cell in cells)
-                        {
-                            if (!ValidateDate(cell, cell.Value))
-                            {
-                                failedCells.Add(cell);
-                            }
-                        }
-                        break;
-                    case Datatyp.plz:
-                        foreach (var cell in cells)
-                        {
-                            if (!ValidatePostleitzahl(cell, cell.Value))
-                            {
-                                failedCells.Add(cell);
-                            }
-                        }
-                        break;
-                    default:
-                        break;
+                    if (ValidateSingle(cell, cell.Value))
+                    {
+                        cell.ValidationStatus = ValidationStatus.Valid;
+                    }
+                    else
+                    {
+                        failedCells.Add(cell);
+                    }
                 }
             }
             return failedCells;

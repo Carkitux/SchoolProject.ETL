@@ -1,18 +1,14 @@
 ﻿using SchoolProject.ETL.Model.DataClasses;
 using SchoolProject.ETL.Model.LogicClasses;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 {
     public partial class FormDialogValidation : Form
     {
-        public FormDialogValidation(DataRowCell cell)
+        public FormDialogValidation(DataRowCell cell, int count)
         {
             InitializeComponent();
 
@@ -22,6 +18,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             textBox_ColumnName.Text = cell.Attribut.Name;
             textBox_Datatyp.Text = cell.Attribut.Datatyp.ToString();
             textBox_Value.Text = cell.Value;
+            Text = $"{count} verbleibende Validierungsfehler";
 
             label_ErrorMessage.Text =
                 $"\"{cell.Value}\" ist kein gültiger Inhalt für den Dateityp \"{cell.Attribut.Datatyp}\"";

@@ -50,10 +50,27 @@ namespace SchoolProject.ETL.Model.LogicClasses
                 newDataRow.CreateMatchingCells(oldDataRow);
             }
         }
-        //public static void StornoTransferData(string _quellStObj, string _quellAttribut, string _zielAttribut)
-        //{
+        public static void StornoTransferData(string sourceStObjName, List<string> sourceAttributeName, string targetAttributName)
+        {
+            var transformStObj = StagingArea.TransformStObject;
+            var sourceStObj = StagingArea.GetStagingObject(sourceStObjName);
+            List<Attribut> sourceAttributeList = new List<Attribut>();
+            sourceAttributeName.ForEach(x => { sourceAttributeList.Add(sourceStObj.GetAttribut(x)); });
+            var targetAttribut = transformStObj.GetAttribut(targetAttributName);
 
-        //}
+            foreach (var transformDataRow in transformStObj.DataRows)
+            {
+                var removeCell = transformDataRow.DataRowCells
+                    .Where(x => sourceAttributeList.Where(y => y.TransferredTo.Contains(targetAttribut)).Count() > 0)
+                    .FirstOrDefault();
+                transformDataRow.DataRowCells.Remove(removeCell);
+            }
+            transformStObj.DataRows.RemoveAll(x => x.DataRowCells.Count == 0);
+            foreach (var item in sourceAttributeList)
+            {
+                targetAttribut.RemoveTransferredAttributes(item);
+            }
+        }
         public static void DataMerge(string sourceStObjName, List<string> sourceAttributeNameList, string connector)
         {
             var mergeStgObj = StagingArea.SplitMergeStObject;
@@ -79,14 +96,49 @@ namespace SchoolProject.ETL.Model.LogicClasses
                 CreateDataRowCellAndOrDataRow(mergeStgObj, sourceDataRows, newValue, mergeAttribut, ref mergeDataRow);
             }
         }
-        //public static void DataSplit(string _quellStObj, string _quellAttribut, string _zielAttribut)
-        //{
+        public static void DataSplit(string sourceStObjName, string sourceAttributeName, string separator)
+        {
+            var splitStgObj = StagingArea.SplitMergeStObject;
+            var sourceStObj = StagingArea.GetStagingObject(sourceStObjName);
+            var sourceAttribute = sourceStObj.Attributes
+                .Where(x => x.Name == sourceAttributeName)
+                .FirstOrDefault();
 
-        //}
-        //public static void Ersetzen(string _quellStObj, string _quellAttribut, string _zielAttribut)
-        //{
+            foreach (var sourceDataRows in sourceStObj.DataRows)
+            {
+                var sourceCell = sourceDataRows.DataRowCells
+                    .Where(x => x.Attribut.Equals(sourceAttribute))
+                    .FirstOrDefault();
 
-        //}
+                List<string> newValue, splitAttributName;
+                GetSplitValuesAndAttributesName(separator, sourceCell, out newValue, out splitAttributName);
+                int i = 0;
+                foreach (var item in splitAttributName)
+                {
+                    var splitAttribut = SearchOrCreateMatchingAttribute(splitStgObj, item);
+                    var splitDataRow = splitStgObj.DataRows
+                        .Where(x => x.SourceFileName == sourceDataRows.SourceFileName && x.ID == sourceDataRows.ID)
+                        .FirstOrDefault();
+
+                    CreateDataRowCellAndOrDataRow(splitStgObj, sourceDataRows, newValue[i], splitAttribut, ref splitDataRow);
+                    i++;
+                }
+            }
+        }
+        public static void Ersetzen(string attributName, string oldValue, string newValue)
+        {
+            var transformStObj = StagingArea.TransformStObject;
+            var attribut = transformStObj.GetAttribut(attributName);
+            var cells = attribut.GetAssociatedDataRowCells();
+
+            foreach (var cell in cells)
+            {
+                if (cell.Value.Trim() == oldValue.Trim())
+                {
+                    cell.Value = newValue.Trim();
+                }
+            }
+        }
         public static void CreateAttribut(string columnName, Datatyp datatyp)
         {
             var TransformStObj = StagingArea.TransformStObject;
@@ -136,13 +188,24 @@ namespace SchoolProject.ETL.Model.LogicClasses
                 i++;
             }
         }
+        private static void GetSplitValuesAndAttributesName(string separator, DataRowCell sourceCell, out List<string> newValues, out List<string> splitAttributNames)
+        {
+            newValues = new List<string>();
+            splitAttributNames = new List<string>();
+            int i = 0;
+
+            var splitetValues = sourceCell.Value.Split(separator);
+            foreach (var value in splitetValues)
+            {
+                newValues.Add(value.Trim());
+                splitAttributNames.Add(sourceCell.Attribut.Name + i);
+                i++;
+            }
+        }
         private static Attribut SearchOrCreateMatchingAttribute(StagingObject mergeStgObj, string mergeAttributName)
         {
             var mergeAttribut = mergeStgObj.GetAttribut(mergeAttributName);
-            if (mergeAttribut is null)
-            {
-                mergeAttribut = mergeStgObj.CreateAttribut(mergeAttributName, Datatyp.unknown);
-            }
+            mergeAttribut ??= mergeStgObj.CreateAttribut(mergeAttributName, Datatyp.unknown);
 
             return mergeAttribut;
         }

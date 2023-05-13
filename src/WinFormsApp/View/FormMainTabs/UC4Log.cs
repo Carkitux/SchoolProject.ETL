@@ -53,12 +53,6 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
             textBoxLog.Focus();
             textBoxLog.SelectionStart = textBoxLog.Text.Length;
             textBoxLog.ScrollToCaret();
-
-            // Befüllt beim Laden des UserControls die StatusStripLabels mit allen Log Informationen
-            toolStripStatusLabelPreviewRowCount.Text = $"Preview Zeilen Anzahl: {textBoxLog.Lines.Count()} (max. 1000)";
-            toolStripStatusLabelCurrentLogSize.Text = $"Loggröße: {LogWriter.FileSizeMBCurrent} mb";
-            toolStripStatusLabelLogFileCount.Text = $"Alle Logs Anzahl: {LogWriter.FileCount}";
-            toolStripStatusLabelLogFileSizeSum.Text = $"Alle Logs Größe: {LogWriter.FileSizeMBAll} mb";
         }
 
         private void comboBoxLoglevel_SelectedIndexChanged(object sender, EventArgs e)

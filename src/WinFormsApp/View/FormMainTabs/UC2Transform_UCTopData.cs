@@ -68,7 +68,36 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 
         private void button_DataSplit_Click(object sender, EventArgs e)
         {
+            using (var form = new FormDialogDataSplit())
+            {
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    UC2Transform uc = (UC2Transform)Parent.Parent;
+                    uc.ReCreateAndValidate();
+                }
+                else
+                {
+                    UC2Transform uc = (UC2Transform)Parent.Parent;
+                    uc.ReCreateAndValidate();
+                }
+            }
+        }
 
+        private void button_Ersetzen_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormDialogDataSplit())
+            {
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    UC2Transform uc = (UC2Transform)Parent.Parent;
+                    uc.ReCreateAndValidate();
+                }
+                else
+                {
+                    UC2Transform uc = (UC2Transform)Parent.Parent;
+                    uc.ReCreateAndValidate();
+                }
+            }
         }
     }
 }

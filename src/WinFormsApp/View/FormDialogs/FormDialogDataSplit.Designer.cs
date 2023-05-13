@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             listBox_QuellAttribute = new System.Windows.Forms.ListBox();
-            listBox_TransferToTransform = new System.Windows.Forms.ListBox();
+            listBox_MergeToTransform = new System.Windows.Forms.ListBox();
             button1 = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
             button_Schließen = new System.Windows.Forms.Button();
@@ -54,15 +54,15 @@
             listBox_QuellAttribute.TabIndex = 1;
             listBox_QuellAttribute.SelectedIndexChanged += listBox_QuellAttribute_SelectedIndexChanged;
             // 
-            // listBox_TransferToTransform
+            // listBox_MergeToTransform
             // 
-            listBox_TransferToTransform.FormattingEnabled = true;
-            listBox_TransferToTransform.ItemHeight = 15;
-            listBox_TransferToTransform.Location = new System.Drawing.Point(401, 86);
-            listBox_TransferToTransform.Name = "listBox_TransferToTransform";
-            listBox_TransferToTransform.Size = new System.Drawing.Size(241, 199);
-            listBox_TransferToTransform.TabIndex = 2;
-            listBox_TransferToTransform.SelectedIndexChanged += listBox_TransferToTransform_SelectedIndexChanged;
+            listBox_MergeToTransform.FormattingEnabled = true;
+            listBox_MergeToTransform.ItemHeight = 15;
+            listBox_MergeToTransform.Location = new System.Drawing.Point(401, 86);
+            listBox_MergeToTransform.Name = "listBox_MergeToTransform";
+            listBox_MergeToTransform.Size = new System.Drawing.Size(241, 199);
+            listBox_MergeToTransform.TabIndex = 2;
+            listBox_MergeToTransform.SelectedIndexChanged += listBox_TransferToTransform_SelectedIndexChanged;
             // 
             // button1
             // 
@@ -160,7 +160,7 @@
             Controls.Add(label5);
             Controls.Add(label1);
             Controls.Add(textBox_Split);
-            Controls.Add(listBox_TransferToTransform);
+            Controls.Add(listBox_MergeToTransform);
             Controls.Add(button_Ausfuehren);
             Controls.Add(comboBox_QuellStObj);
             Controls.Add(label2);
@@ -173,7 +173,7 @@
             MinimizeBox = false;
             Name = "FormDialogDataSplit";
             ShowInTaskbar = false;
-            Text = "Datentransfer";
+            Text = "Datensplit";
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -181,7 +181,7 @@
 
         #endregion
         private System.Windows.Forms.ListBox listBox_QuellAttribute;
-        private System.Windows.Forms.ListBox listBox_TransferToTransform;
+        private System.Windows.Forms.ListBox listBox_MergeToTransform;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button_Schließen;

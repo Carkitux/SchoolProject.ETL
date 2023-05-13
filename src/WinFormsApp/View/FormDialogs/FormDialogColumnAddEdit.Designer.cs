@@ -36,6 +36,7 @@
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
@@ -75,6 +76,7 @@
             comboBox1.Size = new System.Drawing.Size(258, 23);
             comboBox1.TabIndex = 3;
             comboBox1.Text = "Datentyp";
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -110,11 +112,22 @@
             numericUpDown1.Size = new System.Drawing.Size(120, 23);
             numericUpDown1.TabIndex = 8;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            label4.Location = new System.Drawing.Point(238, 73);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(121, 30);
+            label4.TabIndex = 9;
+            label4.Text = "0 bedeutet ohne\r\nLängenbeschränkung";
+            // 
             // FormDialogColumnAddEdit
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(381, 148);
+            Controls.Add(label4);
             Controls.Add(numericUpDown1);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -144,5 +157,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label4;
     }
 }

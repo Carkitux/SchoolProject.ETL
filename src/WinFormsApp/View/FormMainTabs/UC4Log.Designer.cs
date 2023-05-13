@@ -35,15 +35,8 @@
             button2 = new System.Windows.Forms.Button();
             buttonLogOeffnen = new System.Windows.Forms.Button();
             panel2 = new System.Windows.Forms.Panel();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
-            toolStripStatusLabelPreviewRowCount = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabelCurrentLogSize = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabelLogFileCount = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusLabelLogFileSizeSum = new System.Windows.Forms.ToolStripStatusLabel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // textBoxLog
@@ -54,7 +47,7 @@
             textBoxLog.Multiline = true;
             textBoxLog.Name = "textBoxLog";
             textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            textBoxLog.Size = new System.Drawing.Size(727, 322);
+            textBoxLog.Size = new System.Drawing.Size(727, 346);
             textBoxLog.TabIndex = 0;
             textBoxLog.WordWrap = false;
             // 
@@ -124,71 +117,25 @@
             // panel2
             // 
             panel2.Controls.Add(textBoxLog);
-            panel2.Controls.Add(statusStrip1);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Location = new System.Drawing.Point(0, 49);
             panel2.Name = "panel2";
             panel2.Size = new System.Drawing.Size(727, 346);
             panel2.TabIndex = 2;
             // 
-            // statusStrip1
-            // 
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabelPreviewRowCount, toolStripStatusLabelCurrentLogSize, toolStripStatusLabel1, toolStripStatusLabelLogFileCount, toolStripStatusLabelLogFileSizeSum });
-            statusStrip1.Location = new System.Drawing.Point(0, 322);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(727, 24);
-            statusStrip1.TabIndex = 1;
-            statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabelPreviewRowCount
-            // 
-            toolStripStatusLabelPreviewRowCount.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            toolStripStatusLabelPreviewRowCount.Name = "toolStripStatusLabelPreviewRowCount";
-            toolStripStatusLabelPreviewRowCount.Size = new System.Drawing.Size(193, 19);
-            toolStripStatusLabelPreviewRowCount.Text = "Preview Zeilen Anzahl: (max. 1000)";
-            // 
-            // toolStripStatusLabelCurrentLogSize
-            // 
-            toolStripStatusLabelCurrentLogSize.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            toolStripStatusLabelCurrentLogSize.Name = "toolStripStatusLabelCurrentLogSize";
-            toolStripStatusLabelCurrentLogSize.Size = new System.Drawing.Size(68, 19);
-            toolStripStatusLabelCurrentLogSize.Text = "Loggröße: ";
-            // 
-            // toolStripStatusLabel1
-            // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(212, 19);
-            toolStripStatusLabel1.Spring = true;
-            // 
-            // toolStripStatusLabelLogFileCount
-            // 
-            toolStripStatusLabelLogFileCount.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            toolStripStatusLabelLogFileCount.Name = "toolStripStatusLabelLogFileCount";
-            toolStripStatusLabelLogFileCount.Size = new System.Drawing.Size(102, 19);
-            toolStripStatusLabelLogFileCount.Text = "Logdatei Anzahl: ";
-            // 
-            // toolStripStatusLabelLogFileSizeSum
-            // 
-            toolStripStatusLabelLogFileSizeSum.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            toolStripStatusLabelLogFileSizeSum.Name = "toolStripStatusLabelLogFileSizeSum";
-            toolStripStatusLabelLogFileSizeSum.Size = new System.Drawing.Size(137, 19);
-            toolStripStatusLabelLogFileSizeSum.Text = "Gesamtgröße alle Logs: ";
-            // 
-            // UserControl4Log
+            // UC4Log
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "UserControl4Log";
+            Name = "UC4Log";
             Size = new System.Drawing.Size(727, 395);
             Load += UserControl4_Log_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -198,12 +145,6 @@
         private System.Windows.Forms.Button buttonLogOeffnen;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelPreviewRowCount;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCurrentLogSize;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelLogFileCount;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelLogFileSizeSum;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Label labelLoglevel;
         private System.Windows.Forms.ComboBox comboBoxLoglevel;
     }

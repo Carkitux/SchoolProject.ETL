@@ -116,9 +116,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
             }
 
             // Validiert den Status des Import Delete Buttons
-            button_ImportDelete.Enabled = (tabControl1.TabPages.Count == 0)
-                ? false
-                : true;
+            button_ImportDelete.Enabled = tabControl1.TabPages.Count != 0;
         }
     }
 }

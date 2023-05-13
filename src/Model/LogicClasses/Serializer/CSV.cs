@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Xml.Linq;
 using SchoolProject.ETL.Model.DataClasses;
 using SchoolProject.ETL.Model.Enums;
 using SchoolProject.ETL.Model.Logging;
@@ -16,14 +17,15 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
 
         public static void LoadFromCSV(string path, string separator, bool hasHeader)
         {
-            LogWriter.LogHeader($"Step Extract - Startet Export CSV: \"{path}\"", Loglevel.Zusammengefasst);
-
+            LogWriter.LogHeader($"Step Extract - Startet Import CSV: \"{path}\"", Loglevel.Zusammengefasst);
             loggingDataRowCount = 0;
             loggingDataRowCellCount = 0;
 
             string fileName = Helper.GetFileName(path);
-            var stagingObject = new StagingObject(fileName);
-            stagingObject.FilePath = path;
+            var stagingObject = new StagingObject(fileName)
+            {
+                FilePath = path
+            };
 
             // Liest alle Zeilen der CSV Datei in ein IEnumerable ein
             var lines = File.ReadLines(path);
@@ -32,7 +34,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
             CSVHeader(separator, hasHeader, lines, stagingObject);
             CSVLines(separator, hasHeader, lines, fileName, stagingObject);
 
-            LogWriter.LogFooter($"Step Extract - Ende Export CSV: \"{path}\"" +
+            LogWriter.LogFooter($"Step Extract - Ende Import CSV: \"{path}\"" +
                 $"\n\t {loggingDataRowCount} Zeilen mit insgesamt {loggingDataRowCellCount} Zellen wurden extrahiert."
                 , Loglevel.Zusammengefasst);
 
@@ -129,6 +131,9 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
 
         public static void CreateCSV(string path)
         {
+            LogWriter.LogHeader($"Step Load - Startet Export CSV: \"{path}\"", Loglevel.Zusammengefasst);
+            loggingDataRowCount = 0;
+            loggingDataRowCellCount = 0;
             // Das TranformStagingObjekt, in dem die transformierte Tabelle gespeichert ist
             var stagingObject = StagingArea.TransformStObject;
             stagingObject.FilePath = path;
@@ -136,14 +141,26 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
             // Schreiben des CSV Headers mit Semikolon Seperator
             using var writer = new StreamWriter(path);
             writer.WriteLine(string.Join(';', stagingObject.Attributes));
+            var countAttributes = stagingObject.Attributes.Count;
+            string[] csvRow;
 
             foreach (var dataRow in stagingObject.DataRows)
             {
+                loggingDataRowCount++;
+                csvRow = new string[countAttributes];
                 // Für jedes SingleData Objekt wird nur der Inhalt in ein Array geschrieben
                 // und dieser wird dann Zeile für Zeile in die Datei geschrieben
-                var csvRow = dataRow.DataRowCells.Select(x => x.Value).ToArray();
+                foreach (var cell in dataRow.DataRowCells)
+                {
+                    loggingDataRowCellCount++;                    
+                    var index = stagingObject.Attributes.IndexOf(cell.Attribut);
+                    csvRow[index] = cell.Value;
+                }
                 writer.WriteLine(string.Join(';', csvRow));
             }
+            LogWriter.LogFooter($"Step Load - Ende Export CSV: \"{path}\"" +
+                $"\n\t {loggingDataRowCount} Zeilen mit insgesamt {loggingDataRowCellCount} Zellen wurden in die CSV Datei geschrieben."
+                , Loglevel.Zusammengefasst);
         }
     }
 }

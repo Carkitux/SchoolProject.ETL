@@ -9,16 +9,14 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 {
     public partial class UC2Transform_UCTopColumns : UserControl
     {
-        public UC2Transform_UCTopColumns(DataGridView dataGridView, Panel informationPanel)
+        public UC2Transform_UCTopColumns(DataGridView dataGridView)
         {
             InitializeComponent();
 
             dataGridView1 = dataGridView;
-            informationPanel1 = informationPanel;
         }
 
         private readonly DataGridView dataGridView1;
-        private readonly Panel informationPanel1;
 
         private void button_ColumnGenerate_Click(object sender, EventArgs e)
         {

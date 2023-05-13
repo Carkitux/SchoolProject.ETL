@@ -28,116 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button_Import = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button_ImportDelete = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusCountRows = new System.Windows.Forms.ToolStripStatusLabel();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.SuspendLayout();
+            button_Import = new System.Windows.Forms.Button();
+            tabControl1 = new System.Windows.Forms.TabControl();
+            openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            panel1 = new System.Windows.Forms.Panel();
+            button_ImportDelete = new System.Windows.Forms.Button();
+            panel2 = new System.Windows.Forms.Panel();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            SuspendLayout();
             // 
             // button_Import
             // 
-            this.button_Import.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button_Import.FlatAppearance.BorderSize = 0;
-            this.button_Import.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_Import.Font = new System.Drawing.Font("Eras Demi ITC", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_Import.Location = new System.Drawing.Point(0, 0);
-            this.button_Import.Name = "button_Import";
-            this.button_Import.Size = new System.Drawing.Size(127, 49);
-            this.button_Import.TabIndex = 1;
-            this.button_Import.Text = "Import";
-            this.button_Import.UseVisualStyleBackColor = true;
-            this.button_Import.Click += new System.EventHandler(this.button_import_Click);
+            button_Import.Dock = System.Windows.Forms.DockStyle.Left;
+            button_Import.FlatAppearance.BorderSize = 0;
+            button_Import.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_Import.Font = new System.Drawing.Font("Eras Demi ITC", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            button_Import.Location = new System.Drawing.Point(0, 0);
+            button_Import.Name = "button_Import";
+            button_Import.Size = new System.Drawing.Size(127, 49);
+            button_Import.TabIndex = 1;
+            button_Import.Text = "Import";
+            button_Import.UseVisualStyleBackColor = true;
+            button_Import.Click += button_import_Click;
             // 
             // tabControl1
             // 
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(782, 424);
-            this.tabControl1.TabIndex = 2;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControl1.Location = new System.Drawing.Point(0, 0);
+            tabControl1.Multiline = true;
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new System.Drawing.Size(782, 446);
+            tabControl1.TabIndex = 2;
+            tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            openFileDialog1.FileName = "openFileDialog1";
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.LightGray;
-            this.panel1.Controls.Add(this.button_ImportDelete);
-            this.panel1.Controls.Add(this.button_Import);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(782, 49);
-            this.panel1.TabIndex = 1;
+            panel1.BackColor = System.Drawing.Color.LightGray;
+            panel1.Controls.Add(button_ImportDelete);
+            panel1.Controls.Add(button_Import);
+            panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(782, 49);
+            panel1.TabIndex = 1;
             // 
             // button_ImportDelete
             // 
-            this.button_ImportDelete.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button_ImportDelete.FlatAppearance.BorderSize = 0;
-            this.button_ImportDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_ImportDelete.Font = new System.Drawing.Font("Eras Demi ITC", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_ImportDelete.Location = new System.Drawing.Point(127, 0);
-            this.button_ImportDelete.Name = "button_ImportDelete";
-            this.button_ImportDelete.Size = new System.Drawing.Size(127, 49);
-            this.button_ImportDelete.TabIndex = 2;
-            this.button_ImportDelete.Text = "Import\r\nlöschen";
-            this.button_ImportDelete.UseVisualStyleBackColor = true;
-            this.button_ImportDelete.Click += new System.EventHandler(this.button_ImportDelete_Click);
+            button_ImportDelete.Dock = System.Windows.Forms.DockStyle.Left;
+            button_ImportDelete.FlatAppearance.BorderSize = 0;
+            button_ImportDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_ImportDelete.Font = new System.Drawing.Font("Eras Demi ITC", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            button_ImportDelete.Location = new System.Drawing.Point(127, 0);
+            button_ImportDelete.Name = "button_ImportDelete";
+            button_ImportDelete.Size = new System.Drawing.Size(127, 49);
+            button_ImportDelete.TabIndex = 2;
+            button_ImportDelete.Text = "Import\r\nlöschen";
+            button_ImportDelete.UseVisualStyleBackColor = true;
+            button_ImportDelete.Click += button_ImportDelete_Click;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.tabControl1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 49);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(782, 424);
-            this.panel2.TabIndex = 2;
+            panel2.Controls.Add(tabControl1);
+            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel2.Location = new System.Drawing.Point(0, 49);
+            panel2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(782, 446);
+            panel2.TabIndex = 2;
             // 
-            // statusStrip1
+            // UC1Extract
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusCountRows});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 473);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(782, 22);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusCountRows
-            // 
-            this.toolStripStatusCountRows.Name = "toolStripStatusCountRows";
-            this.toolStripStatusCountRows.Size = new System.Drawing.Size(81, 17);
-            this.toolStripStatusCountRows.Text = "Zeilen Anzahl:";
-            // 
-            // UserControl1_Extract
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.statusStrip1);
-            this.Name = "UserControl1_Extract";
-            this.Size = new System.Drawing.Size(782, 495);
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            Name = "UC1Extract";
+            Size = new System.Drawing.Size(782, 495);
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
@@ -147,7 +123,5 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button_ImportDelete;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusCountRows;
     }
 }

@@ -34,9 +34,7 @@
             panel1 = new System.Windows.Forms.Panel();
             button_ColumnMenu = new System.Windows.Forms.Button();
             panel2 = new System.Windows.Forms.Panel();
-            statusStrip1 = new System.Windows.Forms.StatusStrip();
             panel3 = new System.Windows.Forms.Panel();
-            panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -81,9 +79,8 @@
             dataGridView1.Location = new System.Drawing.Point(0, 0);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(590, 480);
+            dataGridView1.Size = new System.Drawing.Size(800, 502);
             dataGridView1.TabIndex = 0;
-            dataGridView1.ColumnHeaderMouseClick += dataGridView1_ColumnHeaderCellChanged;
             // 
             // panel1
             // 
@@ -115,20 +112,11 @@
             // panel2
             // 
             panel2.Controls.Add(dataGridView1);
-            panel2.Controls.Add(statusStrip1);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel2.Location = new System.Drawing.Point(210, 98);
+            panel2.Location = new System.Drawing.Point(0, 98);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(590, 502);
+            panel2.Size = new System.Drawing.Size(800, 502);
             panel2.TabIndex = 2;
-            // 
-            // statusStrip1
-            // 
-            statusStrip1.Location = new System.Drawing.Point(0, 480);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(590, 22);
-            statusStrip1.TabIndex = 1;
-            statusStrip1.Text = "statusStrip1";
             // 
             // panel3
             // 
@@ -138,20 +126,11 @@
             panel3.Size = new System.Drawing.Size(800, 49);
             panel3.TabIndex = 3;
             // 
-            // panel4
-            // 
-            panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            panel4.Location = new System.Drawing.Point(0, 98);
-            panel4.Name = "panel4";
-            panel4.Size = new System.Drawing.Size(210, 502);
-            panel4.TabIndex = 4;
-            // 
             // UC2Transform
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(panel2);
-            Controls.Add(panel4);
             Controls.Add(panel3);
             Controls.Add(panel1);
             Name = "UC2Transform";
@@ -159,7 +138,6 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -169,8 +147,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button_ColumnMenu;
         public System.Windows.Forms.DataGridView dataGridView1;
     }

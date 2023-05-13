@@ -34,36 +34,6 @@ namespace SchoolProject.ETL.Model.Logging
         public static bool SkipLogging = false;
         static string stringLine = string.Empty;
 
-        public static int FileCount
-        {
-            get { return Directory.GetFiles(logPath).Length; }
-        }
-        public static float FileSizeMBAll
-        {
-            get
-            {
-                float fileSize = 0;
-                foreach (var fullFilePath in Directory.GetFiles(logPath))
-                {
-                    FileInfo fileInfo = new FileInfo(fullFilePath);
-                    fileSize += fileInfo.Length;
-                }
-                fileSize = (float)Math.Round(fileSize / 1024 / 1024, 2);
-                return fileSize;
-            }
-        }
-        public static float FileSizeMBCurrent
-        {
-            get
-            {
-                float fileSize = 0;
-                FileInfo fileInfo = new FileInfo(filePath);
-                fileSize += fileInfo.Length;
-                fileSize = (float)Math.Round(fileSize / 1024 / 1024, 2);
-                return fileSize;
-            }
-        }
-
         public static void Log(string logMessage, Loglevel loglevel)
         {
             if (SkipLogging)
@@ -133,7 +103,6 @@ namespace SchoolProject.ETL.Model.Logging
             Debug.WriteLine("\t" + logMessage);
             Debug.WriteLine("\t");
         }
-
         private static void WriteInFile(string logMessage)
         {
             using (StreamWriter w = File.AppendText(filePath))

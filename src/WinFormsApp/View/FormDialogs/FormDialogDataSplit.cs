@@ -31,12 +31,20 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            if (!(listBox_QuellAttribute.SelectedItem is null))
+            {
+                listBox_MergeToTransform.Items.Add(listBox_QuellAttribute.SelectedItem);
+                listBox_QuellAttribute.Items.Remove(listBox_QuellAttribute.SelectedItem);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            if (!(listBox_MergeToTransform.SelectedItem is null))
+            {
+                listBox_QuellAttribute.Items.Add(listBox_MergeToTransform.SelectedItem);
+                listBox_MergeToTransform.Items.Remove(listBox_MergeToTransform.SelectedItem);
+            }
         }
 
         private void button_Ausfuehren_Click(object sender, EventArgs e)
@@ -45,7 +53,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
                 .Where(x => x.Name == (string)comboBox_QuellStObj.SelectedItem)
                 .FirstOrDefault();
             var attributes = new List<string>();
-            foreach (var item in listBox_TransferToTransform.Items) { attributes.Add(item.ToString().Split(" // ")[1]); }
+            foreach (var item in listBox_MergeToTransform.Items) { attributes.Add(item.ToString().Split(" // ")[1]); }
             // targetTrasnformAttribut = StagingArea.TransformStObject.Attributes.Where(x => x.Name == comboBox_ZielAttribut.SelectedItem).FirstOrDefault();
 
             //Transform.DataTransfer(stageObject.Name, attributes, targetTrasnformAttribut.Name);
@@ -62,7 +70,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
         {
             List<string[]> listbox3select = new List<string[]>();
 
-            foreach (var item in listBox_TransferToTransform.Items)
+            foreach (var item in listBox_MergeToTransform.Items)
             {
                 listbox3select.Add(item.ToString().Split(" // "));
             }
@@ -89,7 +97,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
         private void listBoxUpdate()
         {
             listBox_QuellAttribute.Items.Clear();
-            listBox_TransferToTransform.Items.Clear();
+            listBox_MergeToTransform.Items.Clear();
 
             foreach (var stagingObject in StagingArea.StObjects.Where(x => x.Name == comboBox_QuellStObj.SelectedItem?.ToString()))
             {
@@ -168,7 +176,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             {
                 return;
             }
-            listBox_TransferToTransform.SelectedItem = null;
+            listBox_MergeToTransform.SelectedItem = null;
         }
     }
 }

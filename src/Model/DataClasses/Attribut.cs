@@ -46,6 +46,11 @@ namespace SchoolProject.ETL.Model.DataClasses
             }
             TransferredFrom.Clear();
         }
+        internal void RemoveTransferredAttributes(Attribut attribut)
+        {
+            attribut.TransferredTo.Remove(this);
+            TransferredFrom.Remove(attribut);
+        }
         public void Edit(string newName, Datatyp newDatatyp, int maxLength)
         {
             Name = newName;

@@ -17,6 +17,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             this.modus = modus;
             this.oldAttributeName = selectedAttributeName;
             var oldAttribute = StagingArea.TransformStObject.GetAttribut(selectedAttributeName);
+            numericUpDown1.Enabled = false;
 
             if (modus == "Edit")
             {
@@ -25,8 +26,12 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
                 comboBox1.SelectedItem = oldAttribute.Datatyp;
                 numericUpDown1.Value = oldAttribute.MaxLength;
             }
-            numericUpDown1.DecimalPlaces = 0;
+            if (oldAttribute?.Datatyp == Datatyp.text)
+            {
+                numericUpDown1.Enabled = true;
+            }
 
+            numericUpDown1.DecimalPlaces = 0;
             StagingArea.TransformStObject.Attributes.ForEach(a => { currentAttributes.Add(a.Name); });
             comboBox1.DataSource = Enum.GetValues(typeof(Datatyp));
         }
@@ -77,6 +82,19 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
         private void button2_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var datatyp = (Datatyp)comboBox1.SelectedItem;
+            if (datatyp == Datatyp.text)
+            {
+                numericUpDown1.Enabled = true;
+            }
+            else
+            {
+                numericUpDown1.Enabled = false;
+            }
         }
     }
 }

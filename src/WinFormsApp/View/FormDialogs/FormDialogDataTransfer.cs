@@ -86,8 +86,11 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 
             var attributeNameList = new List<string>();
             foreach (var item in listBox_TransferToTransform.Items) { attributeNameList.Add(item.ToString().Split(" // ")[1]); }
-
             Transform.DataTransfer(stageObject.Name, attributeNameList.FirstOrDefault(), targetTrasnformAttribut.Name);
+
+            attributeNameList.Clear();
+            foreach (var item in listBox_TransferFromTransform.Items) { attributeNameList.Add(item.ToString().Split(" // ")[1]); }
+            Transform.StornoTransferData(stageObject.Name, attributeNameList, targetTrasnformAttribut.Name);
 
             ReCreateAndValidate();
         }

@@ -24,11 +24,10 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
         }
 
         private UserControl activeMenuUserControl;
-        private UserControl activeLeftMenuUserControl;
 
         private void button_ColumnMenu_Click(object sender, EventArgs e)
         {
-            MenuUserControlSwitch(new UC2Transform_UCTopColumns(dataGridView1, panel4), (Button)sender);
+            MenuUserControlSwitch(new UC2Transform_UCTopColumns(dataGridView1), (Button)sender);
         }
 
         private void button_DataTransferMenu_Click(object sender, EventArgs e)
@@ -42,7 +41,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 
             foreach (var failedCell in failedCells)
             {
-                using (var form5 = new FormDialogValidation(failedCell))
+                using (var form5 = new FormDialogValidation(failedCell, failedCells.Count - failedCells.IndexOf(failedCell)))
                 {
                     if (form5.ShowDialog(this) == DialogResult.OK)
                     {
@@ -78,18 +77,6 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
                 activeMenuUserControl.Parent = panel3;
                 panel3.Visible = true;
             }
-        }
-
-        private void dataGridView1_ColumnHeaderCellChanged(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            StagingObject stagingObject = StagingArea.TransformStObject;
-            var attribut = stagingObject.Attributes.Where(x => x.Name == dataGridView1.Columns[e.ColumnIndex].Name).First();
-            var newUserControl = new UC2Transform_UCLeftColumnInfo(attribut);
-
-            activeLeftMenuUserControl?.Dispose();
-            activeLeftMenuUserControl = newUserControl;
-            activeLeftMenuUserControl.Dock = DockStyle.Fill;
-            activeLeftMenuUserControl.Parent = panel4;
         }
 
         public void ReCreateAndValidate()

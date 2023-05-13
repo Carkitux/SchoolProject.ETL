@@ -32,6 +32,7 @@
             button_DataTransfer = new System.Windows.Forms.Button();
             button_DataMerge = new System.Windows.Forms.Button();
             button_DataSplit = new System.Windows.Forms.Button();
+            button_Ersetzen = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // button_AutomaticTransfer
@@ -60,7 +61,7 @@
             button_DataTransfer.Name = "button_DataTransfer";
             button_DataTransfer.Size = new System.Drawing.Size(127, 49);
             button_DataTransfer.TabIndex = 6;
-            button_DataTransfer.Text = "Transfer";
+            button_DataTransfer.Text = "Daten\r\nTransfer";
             button_DataTransfer.UseVisualStyleBackColor = false;
             button_DataTransfer.Click += button_DataTransferManual_Click;
             // 
@@ -94,17 +95,33 @@
             button_DataSplit.UseVisualStyleBackColor = false;
             button_DataSplit.Click += button_DataSplit_Click;
             // 
+            // button_Ersetzen
+            // 
+            button_Ersetzen.BackColor = System.Drawing.Color.WhiteSmoke;
+            button_Ersetzen.Dock = System.Windows.Forms.DockStyle.Left;
+            button_Ersetzen.FlatAppearance.BorderSize = 0;
+            button_Ersetzen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_Ersetzen.Font = new System.Drawing.Font("Eras Demi ITC", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            button_Ersetzen.Location = new System.Drawing.Point(508, 0);
+            button_Ersetzen.Name = "button_Ersetzen";
+            button_Ersetzen.Size = new System.Drawing.Size(127, 49);
+            button_Ersetzen.TabIndex = 9;
+            button_Ersetzen.Text = "Daten\r\nErsetzen";
+            button_Ersetzen.UseVisualStyleBackColor = false;
+            button_Ersetzen.Click += button_Ersetzen_Click;
+            // 
             // UC2Transform_UCTopData
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.WhiteSmoke;
+            Controls.Add(button_Ersetzen);
             Controls.Add(button_DataSplit);
             Controls.Add(button_DataMerge);
             Controls.Add(button_DataTransfer);
             Controls.Add(button_AutomaticTransfer);
             Name = "UC2Transform_UCTopData";
-            Size = new System.Drawing.Size(709, 49);
+            Size = new System.Drawing.Size(792, 49);
             ResumeLayout(false);
         }
 
@@ -114,5 +131,6 @@
         private System.Windows.Forms.Button button_DataTransfer;
         private System.Windows.Forms.Button button_DataMerge;
         private System.Windows.Forms.Button button_DataSplit;
+        private System.Windows.Forms.Button button_Ersetzen;
     }
 }
