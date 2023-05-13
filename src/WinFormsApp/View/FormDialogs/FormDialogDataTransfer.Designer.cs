@@ -38,16 +38,9 @@
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             comboBox_QuellStObj = new System.Windows.Forms.ComboBox();
-            button_Reset = new System.Windows.Forms.Button();
             button_Ausfuehren = new System.Windows.Forms.Button();
             comboBox_ZielAttribut = new System.Windows.Forms.ComboBox();
-            comboBox_ZielAttribut2 = new System.Windows.Forms.ComboBox();
-            radioButton_Transfer = new System.Windows.Forms.RadioButton();
-            radioButton_Merge = new System.Windows.Forms.RadioButton();
-            radioButton_Split = new System.Windows.Forms.RadioButton();
             listBox_ZielAttribute = new System.Windows.Forms.ListBox();
-            textBox_Split = new System.Windows.Forms.TextBox();
-            textBox_Merge = new System.Windows.Forms.TextBox();
             listBox_TransferFromTransform = new System.Windows.Forms.ListBox();
             label1 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
@@ -135,17 +128,6 @@
             comboBox_QuellStObj.Text = "Bitte auswählen";
             comboBox_QuellStObj.SelectedIndexChanged += comboBox_QuellStObj_SelectedIndexChanged;
             // 
-            // button_Reset
-            // 
-            button_Reset.Location = new System.Drawing.Point(298, 19);
-            button_Reset.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            button_Reset.Name = "button_Reset";
-            button_Reset.Size = new System.Drawing.Size(69, 22);
-            button_Reset.TabIndex = 11;
-            button_Reset.Text = "Reset";
-            button_Reset.UseVisualStyleBackColor = true;
-            button_Reset.Click += button_Reset_Click;
-            // 
             // button_Ausfuehren
             // 
             button_Ausfuehren.Location = new System.Drawing.Point(437, 294);
@@ -168,55 +150,6 @@
             comboBox_ZielAttribut.Text = "1. Zielspalte";
             comboBox_ZielAttribut.SelectedIndexChanged += comboBox_ZielAttribut_SelectedIndexChanged;
             // 
-            // comboBox_ZielAttribut2
-            // 
-            comboBox_ZielAttribut2.FormattingEnabled = true;
-            comboBox_ZielAttribut2.Location = new System.Drawing.Point(401, 46);
-            comboBox_ZielAttribut2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            comboBox_ZielAttribut2.Name = "comboBox_ZielAttribut2";
-            comboBox_ZielAttribut2.Size = new System.Drawing.Size(241, 23);
-            comboBox_ZielAttribut2.TabIndex = 14;
-            comboBox_ZielAttribut2.Text = "2. Zielspalte für Datensplitting";
-            // 
-            // radioButton_Transfer
-            // 
-            radioButton_Transfer.AutoSize = true;
-            radioButton_Transfer.Location = new System.Drawing.Point(298, 164);
-            radioButton_Transfer.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            radioButton_Transfer.Name = "radioButton_Transfer";
-            radioButton_Transfer.Size = new System.Drawing.Size(66, 19);
-            radioButton_Transfer.TabIndex = 15;
-            radioButton_Transfer.TabStop = true;
-            radioButton_Transfer.Text = "Transfer";
-            radioButton_Transfer.UseVisualStyleBackColor = true;
-            radioButton_Transfer.CheckedChanged += radioButton_Transfer_CheckedChanged;
-            // 
-            // radioButton_Merge
-            // 
-            radioButton_Merge.AutoSize = true;
-            radioButton_Merge.Location = new System.Drawing.Point(298, 184);
-            radioButton_Merge.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            radioButton_Merge.Name = "radioButton_Merge";
-            radioButton_Merge.Size = new System.Drawing.Size(59, 19);
-            radioButton_Merge.TabIndex = 16;
-            radioButton_Merge.TabStop = true;
-            radioButton_Merge.Text = "Merge";
-            radioButton_Merge.UseVisualStyleBackColor = true;
-            radioButton_Merge.CheckedChanged += radioButton_Merge_CheckedChanged;
-            // 
-            // radioButton_Split
-            // 
-            radioButton_Split.AutoSize = true;
-            radioButton_Split.Location = new System.Drawing.Point(298, 227);
-            radioButton_Split.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            radioButton_Split.Name = "radioButton_Split";
-            radioButton_Split.Size = new System.Drawing.Size(48, 19);
-            radioButton_Split.TabIndex = 17;
-            radioButton_Split.TabStop = true;
-            radioButton_Split.Text = "Split";
-            radioButton_Split.UseVisualStyleBackColor = true;
-            radioButton_Split.CheckedChanged += radioButton_Split_CheckedChanged;
-            // 
             // listBox_ZielAttribute
             // 
             listBox_ZielAttribute.FormattingEnabled = true;
@@ -226,24 +159,6 @@
             listBox_ZielAttribute.Size = new System.Drawing.Size(241, 139);
             listBox_ZielAttribute.TabIndex = 18;
             listBox_ZielAttribute.SelectedIndexChanged += listBox_ZielAttribute_SelectedIndexChanged;
-            // 
-            // textBox_Split
-            // 
-            textBox_Split.Location = new System.Drawing.Point(298, 246);
-            textBox_Split.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            textBox_Split.Name = "textBox_Split";
-            textBox_Split.PlaceholderText = "Seperator";
-            textBox_Split.Size = new System.Drawing.Size(71, 23);
-            textBox_Split.TabIndex = 19;
-            // 
-            // textBox_Merge
-            // 
-            textBox_Merge.Location = new System.Drawing.Point(298, 204);
-            textBox_Merge.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            textBox_Merge.Name = "textBox_Merge";
-            textBox_Merge.PlaceholderText = "Connector";
-            textBox_Merge.Size = new System.Drawing.Size(71, 23);
-            textBox_Merge.TabIndex = 20;
             // 
             // listBox_TransferFromTransform
             // 
@@ -291,7 +206,7 @@
             label6.TabIndex = 25;
             label6.Text = "label6";
             // 
-            // FormDialog2_TransferData
+            // FormDialogDataTransfer
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -301,17 +216,10 @@
             Controls.Add(label4);
             Controls.Add(label1);
             Controls.Add(listBox_TransferFromTransform);
-            Controls.Add(textBox_Merge);
-            Controls.Add(textBox_Split);
             Controls.Add(listBox_ZielAttribute);
-            Controls.Add(radioButton_Split);
-            Controls.Add(radioButton_Merge);
-            Controls.Add(radioButton_Transfer);
-            Controls.Add(comboBox_ZielAttribut2);
             Controls.Add(listBox_TransferToTransform);
             Controls.Add(comboBox_ZielAttribut);
             Controls.Add(button_Ausfuehren);
-            Controls.Add(button_Reset);
             Controls.Add(comboBox_QuellStObj);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -322,7 +230,7 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "FormDialog2_TransferData";
+            Name = "FormDialogDataTransfer";
             ShowInTaskbar = false;
             Text = "Datentransfer";
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
@@ -340,16 +248,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox_QuellStObj;
-        private System.Windows.Forms.Button button_Reset;
         private System.Windows.Forms.Button button_Ausfuehren;
         private System.Windows.Forms.ComboBox comboBox_ZielAttribut;
-        private System.Windows.Forms.ComboBox comboBox_ZielAttribut2;
-        private System.Windows.Forms.RadioButton radioButton_Transfer;
-        private System.Windows.Forms.RadioButton radioButton_Merge;
-        private System.Windows.Forms.RadioButton radioButton_Split;
         private System.Windows.Forms.ListBox listBox_ZielAttribute;
-        private System.Windows.Forms.TextBox textBox_Split;
-        private System.Windows.Forms.TextBox textBox_Merge;
         private System.Windows.Forms.ListBox listBox_TransferFromTransform;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;

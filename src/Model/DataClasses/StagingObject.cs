@@ -3,7 +3,9 @@ using SchoolProject.ETL.Model.Enums;
 using SchoolProject.ETL.Model.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace SchoolProject.ETL.Model.DataClasses
 {
@@ -21,6 +23,18 @@ namespace SchoolProject.ETL.Model.DataClasses
         public string Name { get; private set; }
         public List<DataRow> DataRows { get; private set; } = new List<DataRow>();
         public List<Attribut> Attributes { get; private set; } = new List<Attribut>();
+        public string FilePath { get; set; }
+        public float FileSizeMB
+        {
+            get
+            {
+                float fileSize = 0;
+                FileInfo fileInfo = new FileInfo(FilePath);
+                fileSize += fileInfo.Length;
+                fileSize = (float)Math.Round(fileSize / 1024 / 1024, 2);
+                return fileSize;
+            }
+        }
 
         // Methods
         internal Attribut CreateAttribut(string name, Datatyp datatyp)

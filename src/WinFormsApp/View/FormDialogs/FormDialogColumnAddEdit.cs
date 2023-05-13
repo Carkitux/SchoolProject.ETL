@@ -4,6 +4,7 @@ using SchoolProject.ETL.Model.LogicClasses;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 {
@@ -22,7 +23,9 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
                 Text = "Spalte bearbeiten";
                 textBox1.Text = oldAttribute.Name;
                 comboBox1.SelectedItem = oldAttribute.Datatyp;
+                numericUpDown1.Value = oldAttribute.MaxLength;
             }
+            numericUpDown1.DecimalPlaces = 0;
 
             StagingArea.TransformStObject.Attributes.ForEach(a => { currentAttributes.Add(a.Name); });
             comboBox1.DataSource = Enum.GetValues(typeof(Datatyp));
@@ -35,6 +38,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
         private void button1_Click(object sender, EventArgs e)
         {
             var columnName = textBox1.Text;
+            var maxLength = (int)numericUpDown1.Value;
             var datatyp = comboBox1.SelectedItem is null
                 ? Datatyp.unknown
                 : (Datatyp)comboBox1.SelectedItem;
@@ -64,7 +68,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
                 }
 
                 var attribut = StagingArea.TransformStObject.GetAttribut(oldAttributeName);
-                attribut.Edit(columnName, datatyp);
+                attribut.Edit(columnName, datatyp, maxLength);
             }
 
             DialogResult = DialogResult.OK;

@@ -35,9 +35,9 @@
             // 
             // label1
             // 
-            label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(146, 9);
+            label1.Dock = System.Windows.Forms.DockStyle.Top;
+            label1.Location = new System.Drawing.Point(0, 0);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(38, 15);
             label1.TabIndex = 0;
@@ -46,7 +46,7 @@
             // 
             // button_Okay
             // 
-            button_Okay.Location = new System.Drawing.Point(163, 54);
+            button_Okay.Location = new System.Drawing.Point(209, 54);
             button_Okay.Name = "button_Okay";
             button_Okay.Size = new System.Drawing.Size(75, 23);
             button_Okay.TabIndex = 1;
@@ -56,7 +56,7 @@
             // 
             // button_Cancel
             // 
-            button_Cancel.Location = new System.Drawing.Point(244, 54);
+            button_Cancel.Location = new System.Drawing.Point(290, 54);
             button_Cancel.Name = "button_Cancel";
             button_Cancel.Size = new System.Drawing.Size(75, 23);
             button_Cancel.TabIndex = 2;
@@ -64,18 +64,19 @@
             button_Cancel.UseVisualStyleBackColor = true;
             button_Cancel.Click += button_Cancel_Click;
             // 
-            // FormDialog3_Confirmation
+            // FormDialogDefaultConfirmation
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(331, 89);
+            AutoSize = true;
+            ClientSize = new System.Drawing.Size(377, 89);
             Controls.Add(button_Cancel);
             Controls.Add(button_Okay);
             Controls.Add(label1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "FormDialog3_Confirmation";
+            Name = "FormDialogDefaultConfirmation";
             ShowInTaskbar = false;
             Text = "FormDialog3_Confirmation";
             TopMost = true;

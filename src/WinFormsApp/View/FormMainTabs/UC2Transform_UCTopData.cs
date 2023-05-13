@@ -34,9 +34,9 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 
         private void button_DataTransferManual_Click(object sender, EventArgs e)
         {
-            using (var form2 = new FormDialogDataTransfer())
+            using (var form = new FormDialogDataTransfer())
             {
-                if (form2.ShowDialog(this) == DialogResult.OK)
+                if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     UC2Transform uc = (UC2Transform)Parent.Parent;
                     uc.ReCreateAndValidate();
@@ -49,7 +49,24 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button_DataMerge_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormDialogDataMerge())
+            {
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    UC2Transform uc = (UC2Transform)Parent.Parent;
+                    uc.ReCreateAndValidate();
+                }
+                else
+                {
+                    UC2Transform uc = (UC2Transform)Parent.Parent;
+                    uc.ReCreateAndValidate();
+                }
+            }
+        }
+
+        private void button_DataSplit_Click(object sender, EventArgs e)
         {
 
         }

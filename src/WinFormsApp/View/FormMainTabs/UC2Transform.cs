@@ -38,18 +38,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
 
         private void button_DataValidate_Click(object sender, EventArgs e)
         {
-            List<DataRowCell> failedCells = new List<DataRowCell>();
-            foreach (var attribut in StagingArea.TransformStObject.Attributes.Where(x => x.Datatyp == Model.Enums.Datatyp.email))
-            {
-                var cells = attribut.GetAssociatedDataRowCells();
-                foreach (var cell in cells)
-                {
-                    if (!Validation.ValidateEMail(cell, cell.Value))
-                    {
-                        failedCells.Add(cell);
-                    }
-                }
-            }
+            List<DataRowCell> failedCells = Validation.Validate();
 
             foreach (var failedCell in failedCells)
             {

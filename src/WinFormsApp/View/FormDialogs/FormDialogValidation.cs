@@ -38,7 +38,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
                     $"Der Inhalt wird gelöscht.";
                 textBox_Value.BackColor = Color.LightGreen;
             }
-            else if (!Validation.ValidateEMail(cell, textBox_Value.Text))
+            else if (!Validation.ValidateSingle(cell, textBox_Value.Text))
             {
                 label_ErrorMessage.Text =
                     $"\"{cell.Value}\" ist kein gültiger Inhalt für den Dateityp \"{cell.Attribut.Datatyp}\".";
@@ -64,7 +64,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             {
                 DialogResult = DialogResult.OK;
             }
-            else if (!Validation.ValidateEMail(cell, textBox_Value.Text))
+            else if (Validation.ValidateSingle(cell, textBox_Value.Text))
             {
                 DialogResult = DialogResult.OK;
             }

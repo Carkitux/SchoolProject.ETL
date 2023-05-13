@@ -59,6 +59,17 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
                 path = path + item + "\\";
             }
             Process.Start("explorer.exe", path);
+
+            int countSourceFiles = 0;
+            float fileSizeSourceFiles = 0;
+            foreach (var item in StagingArea.StObjects)
+            {
+                fileSizeSourceFiles += item.FileSizeMB;
+                countSourceFiles++;
+            }
+
+            MessageBox.Show($"{countSourceFiles} Quelldateien mit einer Gesamtgröße von {fileSizeSourceFiles} MB " +
+                $"wurden in eine Größe von {StagingArea.TransformStObject.FileSizeMB} MB transformiert.");
         }
 
         public override void Refresh()

@@ -58,6 +58,7 @@
             // 
             // textBox_ColumnName
             // 
+            textBox_ColumnName.Enabled = false;
             textBox_ColumnName.Location = new System.Drawing.Point(12, 41);
             textBox_ColumnName.Name = "textBox_ColumnName";
             textBox_ColumnName.Size = new System.Drawing.Size(331, 23);

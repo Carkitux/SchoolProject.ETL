@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using SchoolProject.ETL.Model.DataClasses;
 using SchoolProject.ETL.Model.Enums;
 using SchoolProject.ETL.Model.Logging;
@@ -10,15 +11,19 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
 {
     public class CSV
     {
-        int loggingDataRowCount;
-        int loggingDataRowCellCount;
+        static int loggingDataRowCount = 0;
+        static int loggingDataRowCellCount = 0;
 
         public static void LoadFromCSV(string path, string separator, bool hasHeader)
         {
             LogWriter.LogHeader($"Step Extract - Startet Export CSV: \"{path}\"", Loglevel.Zusammengefasst);
 
+            loggingDataRowCount = 0;
+            loggingDataRowCellCount = 0;
+
             string fileName = Helper.GetFileName(path);
             var stagingObject = new StagingObject(fileName);
+            stagingObject.FilePath = path;
 
             // Liest alle Zeilen der CSV Datei in ein IEnumerable ein
             var lines = File.ReadLines(path);
@@ -26,6 +31,10 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
             // Befüllt das StagingObject mit allen Attributen und Zeilen der CSV
             CSVHeader(separator, hasHeader, lines, stagingObject);
             CSVLines(separator, hasHeader, lines, fileName, stagingObject);
+
+            LogWriter.LogFooter($"Step Extract - Ende Export CSV: \"{path}\"" +
+                $"\n\t {loggingDataRowCount} Zeilen mit insgesamt {loggingDataRowCellCount} Zellen wurden extrahiert."
+                , Loglevel.Zusammengefasst);
 
             // Fügt das Staging Object unserer global verfügbaren Staging Area für spätere Benutzung hinzu
             StagingArea.StObjects.Add(stagingObject);
@@ -78,7 +87,10 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
         private static void CSVLines(string separator, bool hasHeader, IEnumerable<string> lines, string dateiname, StagingObject stagingObject)
         {
             if (hasHeader)
+            {
                 lines = lines.Skip(1);
+            }
+
             foreach (var line in lines)
             {
                 // Erstellen eines neuen Datensatzes für jede Zeile der CSV
@@ -93,21 +105,23 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
                 {
                     DataRowCell singleData;
 
-                    // Wenn die CSV Header hat, dann wird die SingleData mit dem vorher erstellten Attribut hinterlegt
-                    // sonst wird es Ohne Attributskennung erstellt
-                    //if (hasHeader)
-                    //{
-                    singleData = new DataRowCell(datensatz, stagingObject.Attributes[currentFieldID], field);
-                    //}
-                    //else
-                    //{
-                    //    singleData = new DataCell(datensatz, null, field);
-                    //}
+                    try
+                    {
+                        singleData = new DataRowCell(datensatz, stagingObject.Attributes[currentFieldID], field);
+                    }
+                    catch (Exception)
+                    {
+                        stagingObject.CreateAttribut("Spalte" + currentFieldID, Datatyp.unknown);
+                        singleData = new DataRowCell(datensatz, stagingObject.Attributes[currentFieldID], field);
+                    }
                     // Fügt das erstellte SingleData dem Datensatz hinzu
                     datensatz.DataRowCells.Add(singleData);
 
                     currentFieldID++;
+                    loggingDataRowCellCount++;
                 }
+                loggingDataRowCount++;
+
                 // Fügt den Datensatz dem aktuellem Staging Objekt hinzu
                 stagingObject.DataRows.Add(datensatz);
             }
@@ -117,6 +131,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
         {
             // Das TranformStagingObjekt, in dem die transformierte Tabelle gespeichert ist
             var stagingObject = StagingArea.TransformStObject;
+            stagingObject.FilePath = path;
 
             // Schreiben des CSV Headers mit Semikolon Seperator
             using var writer = new StreamWriter(path);

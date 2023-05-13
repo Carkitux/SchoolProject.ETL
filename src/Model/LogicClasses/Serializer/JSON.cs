@@ -15,6 +15,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
         {
             string fileName = Helper.GetFileName(path);
             var stagingObject = new StagingObject(fileName);
+            stagingObject.FilePath = path;
 
             // Holt alle JSON Objekte innerhalb der JSON Datei und speichert sie in einer Liste.
             var json = File.ReadAllText(path);
@@ -54,6 +55,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
         {
             // Das TranformStagingObjekt, in dem die transformierte Tabelle gespeichert ist
             var stagingObject = StagingArea.TransformStObject;
+            stagingObject.FilePath = path;
 
             var list = new List<JObject>();
             foreach (var datensatz in stagingObject.DataRows)

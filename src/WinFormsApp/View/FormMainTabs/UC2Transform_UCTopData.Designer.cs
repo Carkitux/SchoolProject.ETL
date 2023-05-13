@@ -77,7 +77,7 @@
             button_DataMerge.TabIndex = 7;
             button_DataMerge.Text = "Merge";
             button_DataMerge.UseVisualStyleBackColor = false;
-            button_DataMerge.Click += button1_Click;
+            button_DataMerge.Click += button_DataMerge_Click;
             // 
             // button_DataSplit
             // 
@@ -92,6 +92,7 @@
             button_DataSplit.TabIndex = 8;
             button_DataSplit.Text = "Split";
             button_DataSplit.UseVisualStyleBackColor = false;
+            button_DataSplit.Click += button_DataSplit_Click;
             // 
             // UC2Transform_UCTopData
             // 

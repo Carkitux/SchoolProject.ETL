@@ -20,13 +20,11 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             {
                 comboBox_QuellStObj.Items.Add(item.Name);
             }
+            comboBox_QuellStObj.Items.Add(StagingArea.SplitMergeStObject.Name);
             foreach (var item in StagingArea.TransformStObject.Attributes)
             {
                 comboBox_ZielAttribut.Items.Add(item.Name);
-                comboBox_ZielAttribut2.Items.Add(item.Name);
             }
-
-            radioButton_Transfer.Checked = true;
 
             ReCreateAndValidate();
         }
@@ -39,14 +37,6 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
         private void button1_Click(object sender, EventArgs e)
         {
             if (listBox_QuellAttribute.SelectedItem is null && listBox_TransferFromTransform.SelectedItem is null)
-            {
-                return;
-            }
-            if ((radioButton_Transfer.Checked || radioButton_Merge.Checked) && listBox_TransferToTransform.Items.Count >= 1)
-            {
-                return;
-            }
-            if (radioButton_Merge.Checked && listBox_TransferToTransform.Items.Count >= 2)
             {
                 return;
             }
@@ -84,12 +74,20 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
 
         private void button_Ausfuehren_Click(object sender, EventArgs e)
         {
-            var stageObject = StagingArea.StObjects.Where(x => x.Name == comboBox_QuellStObj.SelectedItem).FirstOrDefault();
-            List<string> attributes = new List<string>();
-            foreach (var item in listBox_TransferToTransform.Items) { attributes.Add(item.ToString().Split(" // ")[1]); }
-            var targetTrasnformAttribut = StagingArea.TransformStObject.Attributes.Where(x => x.Name == comboBox_ZielAttribut.SelectedItem).FirstOrDefault();
+            if (comboBox_ZielAttribut.SelectedItem is null)
+            {
+                return;
+            }
 
-            Transform.DataTransfer(stageObject.Name, attributes, targetTrasnformAttribut.Name);
+            var stageObject = StagingArea.GetStagingObject((string)comboBox_QuellStObj.SelectedItem);
+            var targetTrasnformAttribut = StagingArea.TransformStObject.Attributes
+                .Where(x => x.Name == (string)comboBox_ZielAttribut.SelectedItem)
+                .FirstOrDefault();
+
+            var attributeNameList = new List<string>();
+            foreach (var item in listBox_TransferToTransform.Items) { attributeNameList.Add(item.ToString().Split(" // ")[1]); }
+
+            Transform.DataTransfer(stageObject.Name, attributeNameList.FirstOrDefault(), targetTrasnformAttribut.Name);
 
             ReCreateAndValidate();
         }
@@ -125,25 +123,6 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
         public void ReCreateAndValidate()
         {
             listBoxUpdate();
-
-            if (radioButton_Transfer.Checked)
-            {
-                comboBox_ZielAttribut2.Enabled = false;
-                textBox_Split.Enabled = false;
-                textBox_Merge.Enabled = false;
-            }
-            else if (radioButton_Merge.Checked)
-            {
-                comboBox_ZielAttribut2.Enabled = false;
-                textBox_Split.Enabled = false;
-                textBox_Merge.Enabled = true;
-            }
-            else if (radioButton_Split.Checked)
-            {
-                comboBox_ZielAttribut2.Enabled = true;
-                textBox_Split.Enabled = true;
-                textBox_Merge.Enabled = false;
-            }
         }
 
         private void listBoxUpdate()
@@ -153,14 +132,15 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             listBox_TransferToTransform.Items.Clear();
             listBox_ZielAttribute.Items.Clear();
 
-            foreach (var stagingObject in StagingArea.StObjects.Where(x => x.Name == comboBox_QuellStObj.SelectedItem?.ToString()))
+            var stagingObject = StagingArea.GetStagingObject(comboBox_QuellStObj.SelectedItem?.ToString());
+            if (!(stagingObject is null))
             {
-                foreach (var attribut in stagingObject.Attributes.Where(x => x.TransferredTo.Count == 0).ToList())
+                foreach (var attribut in stagingObject?.Attributes.Where(x => x.TransferredTo.Count == 0).ToList())
                 {
                     listBox_QuellAttribute.Items.Add(stagingObject.Name + " // " + attribut.Name);
                 }
             }
-
+  
             foreach (var attribut in StagingArea.TransformStObject.Attributes.Where(x => x.Name == comboBox_ZielAttribut.SelectedItem?.ToString()))
             {
                 foreach (var sourceAttribut in attribut.TransferredFrom)
@@ -176,21 +156,6 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
         }
 
         private void comboBox_ZielAttribut_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ReCreateAndValidate();
-        }
-
-        private void radioButton_Transfer_CheckedChanged(object sender, EventArgs e)
-        {
-            ReCreateAndValidate();
-        }
-
-        private void radioButton_Merge_CheckedChanged(object sender, EventArgs e)
-        {
-            ReCreateAndValidate();
-        }
-
-        private void radioButton_Split_CheckedChanged(object sender, EventArgs e)
         {
             ReCreateAndValidate();
         }

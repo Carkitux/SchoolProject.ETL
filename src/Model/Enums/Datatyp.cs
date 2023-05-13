@@ -9,5 +9,6 @@
         boolean = 40,
         email = 50,
         datum = 60,
+        plz = 70
     }
 }

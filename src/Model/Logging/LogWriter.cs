@@ -29,9 +29,10 @@ namespace SchoolProject.ETL.Model.Logging
         }
 
         public static string logPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + "Logging";
-        public static string logFile = $"Log {DateTime.Now.GetDateTimeFormats()[2]} {DateTime.Now.GetHashCode()}.txt";
+        public static string logFile = $"Log {DateTime.Now.GetDateTimeFormats()[2]} {DateTime.Now.Hour}.{DateTime.Now.Minute}.{DateTime.Now.Second},{DateTime.Now.Millisecond}.txt";
         public static string filePath = logPath + "\\" + logFile;
         public static bool SkipLogging = false;
+        static string stringLine = string.Empty;
 
         public static int FileCount
         {
@@ -93,7 +94,7 @@ namespace SchoolProject.ETL.Model.Logging
             }
 
             logMessage = DateTime.Now + ": " + logMessage;
-            string stringLine = string.Empty;
+            stringLine = string.Empty;
             for (int i = 0; i < logMessage.Length; i++)
             {
                 stringLine += "-";
@@ -120,16 +121,15 @@ namespace SchoolProject.ETL.Model.Logging
             }
 
             logMessage = DateTime.Now + ": " + logMessage;
-            string stringLine = string.Empty;
-            for (int i = 0; i < logMessage.Length; i++)
+
+            if (applicationLoglevel == Loglevel.Detailliert)
             {
-                stringLine += "-";
+                WriteInFile("\t" + stringLine);
+                Debug.WriteLine("\t" + stringLine);
             }
 
-            WriteInFile("\t" + stringLine);
             WriteInFile("\t" + logMessage);
             WriteInFile("\t");
-            Debug.WriteLine("\t" + stringLine);
             Debug.WriteLine("\t" + logMessage);
             Debug.WriteLine("\t");
         }

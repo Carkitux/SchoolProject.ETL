@@ -32,11 +32,16 @@
             button2 = new System.Windows.Forms.Button();
             textBox1 = new System.Windows.Forms.TextBox();
             comboBox1 = new System.Windows.Forms.ComboBox();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(214, 70);
+            button1.Location = new System.Drawing.Point(213, 113);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(75, 23);
             button1.TabIndex = 0;
@@ -46,7 +51,7 @@
             // 
             // button2
             // 
-            button2.Location = new System.Drawing.Point(295, 70);
+            button2.Location = new System.Drawing.Point(294, 113);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(75, 23);
             button2.TabIndex = 1;
@@ -56,26 +61,64 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new System.Drawing.Point(12, 12);
+            textBox1.Location = new System.Drawing.Point(112, 12);
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Spaltenname";
-            textBox1.Size = new System.Drawing.Size(358, 23);
+            textBox1.Size = new System.Drawing.Size(258, 23);
             textBox1.TabIndex = 2;
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(12, 41);
+            comboBox1.Location = new System.Drawing.Point(112, 41);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(358, 23);
+            comboBox1.Size = new System.Drawing.Size(258, 23);
             comboBox1.TabIndex = 3;
             comboBox1.Text = "Datentyp";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(12, 73);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(97, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Maximale Länge:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(12, 44);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(58, 15);
+            label2.TabIndex = 6;
+            label2.Text = "Datentyp:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(12, 15);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(79, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Spaltenname:";
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new System.Drawing.Point(112, 71);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new System.Drawing.Size(120, 23);
+            numericUpDown1.TabIndex = 8;
             // 
             // FormDialogColumnAddEdit
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(382, 102);
+            ClientSize = new System.Drawing.Size(381, 148);
+            Controls.Add(numericUpDown1);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(comboBox1);
             Controls.Add(textBox1);
             Controls.Add(button2);
@@ -86,6 +129,7 @@
             Name = "FormDialogColumnAddEdit";
             ShowInTaskbar = false;
             Text = "Spalte hinzufügen";
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -96,5 +140,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

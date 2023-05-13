@@ -19,6 +19,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
 
             // Erstellen des neuen StagingObjects
             var stagingObject = new StagingObject(filename);
+            stagingObject.FilePath = path;
 
             foreach (XmlNode node in doc.DocumentElement.ChildNodes)
             {
@@ -53,6 +54,7 @@ namespace SchoolProject.ETL.Model.LogicClasses.Serializer
         {
             // Objekt, in dem die transformierte Tabelle gespeichert ist.
             var stagingObject = StagingArea.TransformStObject;
+            stagingObject.FilePath = path;
 
             // Erstellung des Dokumentes und der Deklaration.
             var xmlDocument = new XmlDocument();

@@ -10,6 +10,8 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             InitializeComponent();
 
             label1.Text = labelText;
+
+            Refresh();
         }
 
         private void button_Okay_Click(object sender, EventArgs e)

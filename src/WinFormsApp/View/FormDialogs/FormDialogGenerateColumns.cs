@@ -21,6 +21,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             {
                 comboBox_stagingObject.Items.Add(item.Name);
             }
+            comboBox_stagingObject.SelectedIndex = 0;
         }
 
         public List<StagingObject> selectedStagingObjects = new List<StagingObject>();

@@ -22,36 +22,37 @@ namespace SchoolProject.ETL.Model.DataClasses
         public StagingObject StagingObject { get; private set; }
         public string Name { get; private set; }
         public Datatyp Datatyp { get; private set; }
-        public List<string> TransferredTo { get; } = new List<string>();
-        public List<string> TransferredFrom { get; } = new List<string>();
+        public int MaxLength { get; set; }
+        public List<Attribut> TransferredTo { get; } = new List<Attribut>();
+        public List<Attribut> TransferredFrom { get; } = new List<Attribut>();
 
         // Methods
         internal void AddTransferredAttributes(Attribut targetAttribut)
         {
-            if (!this.TransferredTo.Contains($"{targetAttribut.StagingObject.Name} // {targetAttribut.Name}"))
+            if (!this.TransferredTo.Contains(targetAttribut))
             {
-                this.TransferredTo.Add($"{targetAttribut.StagingObject.Name} // {targetAttribut.Name}");
+                this.TransferredTo.Add(targetAttribut);
             }
-            if (!targetAttribut.TransferredFrom.Contains($"{StagingObject.Name} // {Name}"))
+            if (!targetAttribut.TransferredFrom.Contains(this))
             {
-                targetAttribut.TransferredFrom.Add($"{StagingObject.Name} // {Name}");
+                targetAttribut.TransferredFrom.Add(this);
             }
         }
         internal void RemoveTransferredAttributes()
         {
-            var allAttributes = StagingArea.StObjects
-                .SelectMany(x => x.Attributes)
-                .Where(x => x.TransferredTo.Contains($"{StagingObject.Name} // {Name}"))
-                .ToList();
-            foreach (var attribute in allAttributes)
+            foreach (var attribute in TransferredFrom)
             {
-                attribute.TransferredTo.Remove($"{StagingObject.Name} // {Name}");
+                attribute.TransferredTo.Remove(this);
             }
+            TransferredFrom.Clear();
         }
-        public void Edit(string newName, Datatyp newDatatyp)
+        public void Edit(string newName, Datatyp newDatatyp, int maxLength)
         {
             Name = newName;
             Datatyp = newDatatyp;
+            MaxLength = maxLength;
+
+
         }
 
         public List<DataRowCell> GetAssociatedDataRowCells()

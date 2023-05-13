@@ -12,30 +12,25 @@ namespace SchoolProject.ETL.Model.LogicClasses
 {
     public class Transform
     {
-        public static void DataTransfer(string sourceStObjName, List<string> sourceAttributeNameList, string targetAttributName)
+        public static void DataTransfer(string sourceStObjName, string sourceAttributeName, string targetAttributName)
         {
-            var TransformStObj = StagingArea.TransformStObject;
-
+            var transformStObj = StagingArea.TransformStObject;
             var sourceStObj = StagingArea.GetStagingObject(sourceStObjName);
-            var sourceAttributeList = sourceStObj.Attributes.Where(x => sourceAttributeNameList.Contains(x.Name)).ToList();
-            var targetAttribut = TransformStObj.GetAttribut(targetAttributName);
+            var sourceAttribute = sourceStObj.Attributes
+                .Where(x => x.Name == sourceAttributeName)
+                .FirstOrDefault();
+            var targetAttribut = transformStObj.GetAttribut(targetAttributName);
 
             foreach (var sourceDataRows in sourceStObj.DataRows)
             {
-                var sourceCells = sourceDataRows.DataRowCells.Where(x => sourceAttributeList.Where(y => y.Name == x.Attribut.Name).Count() > 0).ToList();
-                string sourceValue = Merge(sourceCells);
+                var sourceCellValue = sourceDataRows.DataRowCells
+                    .Where(x => x.Attribut.Equals(sourceAttribute))
+                    .FirstOrDefault().Value;
+                var transformDataRow = transformStObj.DataRows
+                    .Where(x => x.SourceFileName == sourceDataRows.SourceFileName && x.ID == sourceDataRows.ID)
+                    .FirstOrDefault();
 
-                DataRow transformDataRow = TransformStObj.DataRows.Where(x => x.SourceFileName == sourceDataRows.SourceFileName && x.ID == sourceDataRows.ID).FirstOrDefault();
-                DataRowCell newCell;
-                if (transformDataRow is null)
-                {
-                    transformDataRow = TransformStObj.CreateDataRow(sourceDataRows.ID, sourceDataRows.SourceFileName);
-                    newCell = transformDataRow.CreateCell(targetAttribut, sourceValue);
-                }
-                else
-                {
-                    newCell = transformDataRow.CreateCell(targetAttribut, sourceValue);
-                }
+                var newCell = CreateDataRowCellAndOrDataRow(transformStObj, sourceDataRows, sourceCellValue, targetAttribut, ref transformDataRow);
 
                 newCell.Attribut.AddTransferredAttributes(targetAttribut);
                 targetAttribut.AddTransferredAttributes(newCell.Attribut);
@@ -55,41 +50,43 @@ namespace SchoolProject.ETL.Model.LogicClasses
                 newDataRow.CreateMatchingCells(oldDataRow);
             }
         }
-
         //public static void StornoTransferData(string _quellStObj, string _quellAttribut, string _zielAttribut)
         //{
 
         //}
-
-        private static string Merge(List<DataRowCell> quellsingleDatas)
+        public static void DataMerge(string sourceStObjName, List<string> sourceAttributeNameList, string connector)
         {
-            string neuerInhalt = string.Empty;
-            int i = 0;
-            foreach (var item in quellsingleDatas)
-            {
-                if (quellsingleDatas.Count() - i == 1)
-                {
-                    neuerInhalt += item.Value;
-                }
-                else
-                {
-                    neuerInhalt += item.Value + " ";
-                }
-                i++;
-            }
-            return neuerInhalt;
-        }
+            var mergeStgObj = StagingArea.SplitMergeStObject;
+            var sourceStObj = StagingArea.GetStagingObject(sourceStObjName);
+            var sourceAttributeList = sourceStObj.Attributes
+                .Where(x => sourceAttributeNameList.Contains(x.Name))
+                .ToList();
 
-        //public static void Splitten(string _quellStObj, string _quellAttribut, string _zielAttribut)
+            foreach (var sourceDataRows in sourceStObj.DataRows)
+            {
+                var sourceCells = sourceDataRows.DataRowCells
+                    .Where(x => sourceAttributeList.Where(y => y.Name == x.Attribut.Name).Count() > 0)
+                    .ToList();
+
+                string newValue, mergeAttributName;
+                GetMergedValueAndAttributeName(connector, sourceCells, out newValue, out mergeAttributName);
+
+                var mergeAttribut = SearchOrCreateMatchingAttribute(mergeStgObj, mergeAttributName);
+                var mergeDataRow = mergeStgObj.DataRows
+                    .Where(x => x.SourceFileName == sourceDataRows.SourceFileName && x.ID == sourceDataRows.ID)
+                    .FirstOrDefault();
+
+                CreateDataRowCellAndOrDataRow(mergeStgObj, sourceDataRows, newValue, mergeAttribut, ref mergeDataRow);
+            }
+        }
+        //public static void DataSplit(string _quellStObj, string _quellAttribut, string _zielAttribut)
         //{
 
         //}
-
         //public static void Ersetzen(string _quellStObj, string _quellAttribut, string _zielAttribut)
         //{
 
         //}
-
         public static void CreateAttribut(string columnName, Datatyp datatyp)
         {
             var TransformStObj = StagingArea.TransformStObject;
@@ -116,6 +113,53 @@ namespace SchoolProject.ETL.Model.LogicClasses
                     TransformStObj.CreateAttribut(stObjattribut.Name, Datatyp.unknown);
                 }
             }
+        }
+
+        private static void GetMergedValueAndAttributeName(string connector, List<DataRowCell> sourceCells, out string newValue, out string mergeAttributName)
+        {
+            newValue = string.Empty;
+            mergeAttributName = string.Empty;
+            int i = 0;
+            foreach (var item in sourceCells)
+            {
+                mergeAttributName = item.DataRow.StagingObject.Name + " // ";
+                if (sourceCells.Count() - i == 1)
+                {
+                    newValue += item.Value;
+                    mergeAttributName += item.Attribut.Name;
+                }
+                else
+                {
+                    newValue += item.Value + connector;
+                    mergeAttributName += item.Attribut.Name + " & ";
+                }
+                i++;
+            }
+        }
+        private static Attribut SearchOrCreateMatchingAttribute(StagingObject mergeStgObj, string mergeAttributName)
+        {
+            var mergeAttribut = mergeStgObj.GetAttribut(mergeAttributName);
+            if (mergeAttribut is null)
+            {
+                mergeAttribut = mergeStgObj.CreateAttribut(mergeAttributName, Datatyp.unknown);
+            }
+
+            return mergeAttribut;
+        }
+        private static DataRowCell CreateDataRowCellAndOrDataRow(StagingObject mergeStgObj, DataRow sourceDataRows, string newValue, Attribut mergeAttribut, ref DataRow mergeDataRow)
+        {
+            DataRowCell newCell;
+            if (mergeDataRow is null)
+            {
+                mergeDataRow = mergeStgObj.CreateDataRow(sourceDataRows.ID, sourceDataRows.SourceFileName);
+                newCell = mergeDataRow.CreateCell(mergeAttribut, newValue);
+            }
+            else
+            {
+                newCell = mergeDataRow.CreateCell(mergeAttribut, newValue);
+            }
+
+            return newCell;
         }
     }
 }
