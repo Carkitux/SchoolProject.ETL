@@ -3,6 +3,7 @@ using SchoolProject.ETL.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace SchoolProject.ETL.Model.LogicClasses
@@ -14,7 +15,7 @@ namespace SchoolProject.ETL.Model.LogicClasses
             var stagingObject = StagingArea.TransformStObject;
             var failedCells = new List<DataRowCell>();
 
-            foreach (var attribut in stagingObject.Attributes)
+            foreach (var attribut in stagingObject.Attributes.Where(x => x.Datatyp != Datatyp.unknown))
             {
                 var cells = attribut.GetAssociatedDataRowCells();
 
@@ -51,7 +52,7 @@ namespace SchoolProject.ETL.Model.LogicClasses
                 case Datatyp.plz:
                     return ValidatePostleitzahl(cell, newValue);
                 default:
-                    return false;
+                    return true;
             }
         }
 

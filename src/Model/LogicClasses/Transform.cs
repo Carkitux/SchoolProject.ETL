@@ -50,27 +50,27 @@ namespace SchoolProject.ETL.Model.LogicClasses
                 newDataRow.CreateMatchingCells(oldDataRow);
             }
         }
-        public static void StornoTransferData(string sourceStObjName, List<string> sourceAttributeName, string targetAttributName)
-        {
-            var transformStObj = StagingArea.TransformStObject;
-            var sourceStObj = StagingArea.GetStagingObject(sourceStObjName);
-            List<Attribut> sourceAttributeList = new List<Attribut>();
-            sourceAttributeName.ForEach(x => { sourceAttributeList.Add(sourceStObj.GetAttribut(x)); });
-            var targetAttribut = transformStObj.GetAttribut(targetAttributName);
+        //public static void StornoTransferData(List<string> sourceAttributeName, string targetAttributName)
+        //{
+        //    var transformStObj = StagingArea.TransformStObject;
+        //    List<Attribut> sourceAttributeList = new List<Attribut>();
+        //    var targetAttribut = transformStObj.GetAttribut(targetAttributName);
 
-            foreach (var transformDataRow in transformStObj.DataRows)
-            {
-                var removeCell = transformDataRow.DataRowCells
-                    .Where(x => sourceAttributeList.Where(y => y.TransferredTo.Contains(targetAttribut)).Count() > 0)
-                    .FirstOrDefault();
-                transformDataRow.DataRowCells.Remove(removeCell);
-            }
-            transformStObj.DataRows.RemoveAll(x => x.DataRowCells.Count == 0);
-            foreach (var item in sourceAttributeList)
-            {
-                targetAttribut.RemoveTransferredAttributes(item);
-            }
-        }
+        //    sourceAttributeList.Add(targetAttribut.TransferredFrom.Where(x => x.));
+
+        //    foreach (var transformDataRow in transformStObj.DataRows)
+        //    {
+        //        var removeCell = transformDataRow.DataRowCells
+        //            .Where(x => sourceAttributeList.Where(y => y.TransferredTo.Contains(targetAttribut)).Count() > 0)
+        //            .FirstOrDefault();
+        //        transformDataRow.DataRowCells.Remove(removeCell);
+        //    }
+        //    transformStObj.DataRows.RemoveAll(x => x.DataRowCells.Count == 0);
+        //    foreach (var item in sourceAttributeList)
+        //    {
+        //        targetAttribut.RemoveTransferredAttributes(item);
+        //    }
+        //}
         public static void DataMerge(string sourceStObjName, List<string> sourceAttributeNameList, string connector)
         {
             var mergeStgObj = StagingArea.SplitMergeStObject;

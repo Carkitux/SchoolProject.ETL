@@ -50,6 +50,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormMainTabs
                     else
                     {
                         ReCreateAndValidate();
+                        return;
                     }
                 }
             }

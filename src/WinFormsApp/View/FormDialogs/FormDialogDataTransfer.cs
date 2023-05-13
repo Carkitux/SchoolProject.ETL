@@ -84,13 +84,18 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
                 .Where(x => x.Name == (string)comboBox_ZielAttribut.SelectedItem)
                 .FirstOrDefault();
 
-            var attributeNameList = new List<string>();
-            foreach (var item in listBox_TransferToTransform.Items) { attributeNameList.Add(item.ToString().Split(" // ")[1]); }
-            Transform.DataTransfer(stageObject.Name, attributeNameList.FirstOrDefault(), targetTrasnformAttribut.Name);
-
-            attributeNameList.Clear();
-            foreach (var item in listBox_TransferFromTransform.Items) { attributeNameList.Add(item.ToString().Split(" // ")[1]); }
-            Transform.StornoTransferData(stageObject.Name, attributeNameList, targetTrasnformAttribut.Name);
+            if (listBox_TransferToTransform.Items.Count > 0)
+            {
+                var attributeNameList = new List<string>();
+                foreach (var item in listBox_TransferToTransform.Items) { attributeNameList.Add(item.ToString().Split(" // ")[1]); }
+                Transform.DataTransfer(stageObject.Name, attributeNameList.FirstOrDefault(), targetTrasnformAttribut.Name);
+            }
+            //if (listBox_TransferFromTransform.Items.Count > 0)
+            //{
+            //    var attributeNameList = new List<string>();
+            //    foreach (var item in listBox_TransferFromTransform.Items) { attributeNameList.Add(item.ToString()); }
+            //    Transform.StornoTransferData(attributeNameList, targetTrasnformAttribut.Name);
+            //}
 
             ReCreateAndValidate();
         }

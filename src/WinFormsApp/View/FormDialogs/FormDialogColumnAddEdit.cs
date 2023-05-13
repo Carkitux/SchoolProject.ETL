@@ -18,6 +18,7 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             this.oldAttributeName = selectedAttributeName;
             var oldAttribute = StagingArea.TransformStObject.GetAttribut(selectedAttributeName);
             numericUpDown1.Enabled = false;
+            comboBox1.DataSource = Enum.GetValues(typeof(Datatyp));
 
             if (modus == "Edit")
             {
@@ -29,11 +30,11 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
             if (oldAttribute?.Datatyp == Datatyp.text)
             {
                 numericUpDown1.Enabled = true;
+
             }
 
             numericUpDown1.DecimalPlaces = 0;
             StagingArea.TransformStObject.Attributes.ForEach(a => { currentAttributes.Add(a.Name); });
-            comboBox1.DataSource = Enum.GetValues(typeof(Datatyp));
         }
 
         private string modus;

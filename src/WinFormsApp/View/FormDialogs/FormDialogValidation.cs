@@ -1,4 +1,5 @@
 ﻿using SchoolProject.ETL.Model.DataClasses;
+using SchoolProject.ETL.Model.Enums;
 using SchoolProject.ETL.Model.LogicClasses;
 using System;
 using System.Drawing;
@@ -59,10 +60,12 @@ namespace SchoolProject.ETL.UI.WinFormsApp.View.FormDialogs
         {
             if (textBox_Value.Text == string.Empty)
             {
+                cell.ValidationStatus = ValidationStatus.Valid;
                 DialogResult = DialogResult.OK;
             }
             else if (Validation.ValidateSingle(cell, textBox_Value.Text))
             {
+                cell.ValidationStatus = ValidationStatus.Valid;
                 DialogResult = DialogResult.OK;
             }
 
